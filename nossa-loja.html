@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nossa Loja — Moda à Beira-Mar</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="cabecalho"></div>
+
+  <main>
+    <section class="pagina">
+      <h1>🏪 Nossa loja física</h1>
+      <p style="color:var(--cinza); margin-bottom:24px">Passe por aqui para ver as peças de perto, experimentar e levar na hora.</p>
+
+      <div class="loja-grid">
+        <div class="cartao">
+          <h2>Informações</h2>
+          <div class="linha-info"><span class="emoji">📍</span><div><small>Endereço</small><span id="info-endereco"></span></div></div>
+          <div class="linha-info"><span class="emoji">🕒</span><div><small>Horário</small><span id="info-horario"></span></div></div>
+          <div class="linha-info"><span class="emoji">💬</span><div><small>WhatsApp</small><span id="info-whatsapp"></span></div></div>
+          <div class="linha-info"><span class="emoji">✉️</span><div><small>E-mail</small><span id="info-email"></span></div></div>
+          <div class="linha-info"><span class="emoji">📸</span><div><small>Instagram</small><span id="info-instagram"></span></div></div>
+
+          <div class="mapa">
+            <span class="emoji">🗺️</span>
+            <p>Veja como chegar até a loja:</p>
+            <a id="link-maps" class="btn" target="_blank" rel="noopener">Abrir no Google Maps</a>
+          </div>
+        </div>
+
+        <div class="cartao">
+          <h2>Horário de funcionamento</h2>
+          <div class="horario-linha"><span>Segunda a sexta</span><span>9h às 19h</span></div>
+          <div class="horario-linha"><span>Sábado</span><span>9h às 14h</span></div>
+          <div class="horario-linha"><span>Domingo e feriados</span><span>Fechado</span></div>
+
+          <h2 style="margin-top:22px">Formas de pagamento</h2>
+          <p style="color:var(--cinza); font-size:.95rem; margin-bottom:16px">Pix, cartão de crédito, cartão de débito e dinheiro — tanto na loja quanto na entrega.</p>
+
+          <a id="link-whatsapp-loja" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 Falar no WhatsApp</a>
+          <a class="btn btn-claro" href="index.html#catalogo" style="margin-left:8px">Ver produtos</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="rodape"></div>
+  <a id="botao-whatsapp" class="flutuante-whatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
+
+  <script src="js/config.js"></script>
+  <script src="js/produtos.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
