@@ -127,7 +127,7 @@ function renderizarRodape() {
       <div class="container">
         <nav class="nav nav-rodape">
           <div class="menu-opcoes" id="menu-opcoes">
-            <button type="button" class="opcoes-btn" id="btn-opcoes">Opções ▾</button>
+            <button type="button" class="opcoes-btn" id="btn-opcoes">☰ Opções ▾</button>
             <div class="opcoes-lista" id="lista-opcoes">
               <a href="index.html?cat=Crianças#catalogo">Crianças</a>
               <a href="index.html?cat=Mulher#catalogo">Mulher</a>
