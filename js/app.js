@@ -118,7 +118,7 @@ function renderizarRodape() {
           </div>
           <div>
             <h3>Loja física</h3>
-            <p>📍 ${CONFIG.endereco}, ${CONFIG.cidade} — CEP ${CONFIG.cep}<br>🕒 ${CONFIG.horario}</p>
+            <p>📍 ${CONFIG.endereco}, ${CONFIG.cidade}${CONFIG.cep && CONFIG.cep !== "00000-000" ? " — CEP " + CONFIG.cep : ""}${CONFIG.plusCode ? `<br>🧭 ${CONFIG.plusCode}` : ""}<br>🕒 ${CONFIG.horario}</p>
           </div>
           <div>
             <h3>Contato</h3>
@@ -372,13 +372,18 @@ function preencherPaginaLoja() {
     const el = document.getElementById(id);
     if (el) el.textContent = v;
   };
-  set("info-endereco", `${CONFIG.endereco}, ${CONFIG.cidade} — CEP ${CONFIG.cep}`);
+  const cepValido = CONFIG.cep && CONFIG.cep !== "00000-000";
+  set("info-endereco", `${CONFIG.endereco}, ${CONFIG.cidade}` + (cepValido ? ` — CEP ${CONFIG.cep}` : ""));
+  set("info-pluscode", CONFIG.plusCode || "");
   set("info-horario", CONFIG.horario);
   set("info-whatsapp", "+" + CONFIG.whatsapp);
   set("info-email", CONFIG.email);
   set("info-instagram", CONFIG.instagram);
   const maps = document.getElementById("link-maps");
-  if (maps) maps.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.endereco + ", " + CONFIG.cidade + " " + CONFIG.cep);
+  if (maps) {
+    const q = CONFIG.plusCode ? `${CONFIG.plusCode}, ${CONFIG.cidade}` : `${CONFIG.endereco}, ${CONFIG.cidade} ${CONFIG.cep}`;
+    maps.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+  }
   const wl = document.getElementById("link-whatsapp-loja");
   if (wl) wl.href = "https://wa.me/" + CONFIG.whatsapp;
 }

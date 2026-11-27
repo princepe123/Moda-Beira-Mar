@@ -20,9 +20,10 @@ Altere nome, WhatsApp, endereço, horário, e-mail, Instagram, cores e valores d
 
 ```js
 whatsapp: "5511999998888",   // código do país (55) + DDD + número, só dígitos
-endereco: "Rua das Flores, 100 — Centro",
-cep: "01000-000",
-cidade: "São Paulo/SP",
+endereco: "Terminal",
+cep: "00000-000",           // se deixar "00000-000", o CEP não aparece no site
+plusCode: "JWW3+XP Seixal", // Plus Code do Google Maps — usado no link "Abrir no Google Maps"
+cidade: "Seixal, Setúbal",
 ```
 
 ### 2. Produtos — `js/produtos.js`

@@ -4,6 +4,7 @@ const CONFIG = {
   whatsapp: "5500000000000",
   endereco: "Terminal",
   cep: "00000-000",
+  plusCode: "JWW3+XP Seixal",
   cidade: "Seixal, Setúbal",
   horario: "Seg a Sex: 9h às 19h · Sáb: 9h às 14h",
   email: "contato@minhaloja.com.br",
