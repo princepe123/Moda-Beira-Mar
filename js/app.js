@@ -223,6 +223,23 @@ function renderizarSecaoHome(idLista, lista) {
   div.innerHTML = lista.map(cardProduto).join("");
 }
 
+function cardProdutoLinha(p) {
+  const desconto = p.precoAntigo ? Math.round((1 - p.preco / p.precoAntigo) * 100) : 0;
+  return `
+    <article class="card card-linha">
+      <a class="card-img-linha" href="produto.html?id=${p.id}" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
+        ${midiaProduto(p, "item-foto")}
+        ${p.novo ? `<span class="tag-novo tag-linha">NOVO</span>` : ""}
+      </a>
+      <div class="card-corpo-linha">
+        <span class="card-cat">${p.categoria}</span>
+        <h3 class="card-nome"><a href="produto.html?id=${p.id}">${p.nome}</a></h3>
+        <p class="card-preco">${p.precoAntigo ? `<s>${formatarPreco(p.precoAntigo)}</s>` : ""}<strong>${formatarPreco(p.preco)}</strong>${desconto ? ` <span class="tag-desconto-inline">-${desconto}%</span>` : ""}</p>
+      </div>
+      <button class="btn btn-adicionar-linha" onclick="adicionarAoCarrinho(${p.id})">Adicionar</button>
+    </article>`;
+}
+
 let carrosselTimer = null;
 
 function iniciarCarrosselNovidades() {
@@ -232,18 +249,18 @@ function iniciarCarrosselNovidades() {
   if (total <= 4) return;
   const carrossel = document.getElementById("carrossel-novidades");
   let indice = 0;
-  const visiveis = () => {
+  const passo = () => {
     const card = faixa.querySelector(".card");
-    if (!card || !carrossel) return 1;
-    const passo = card.getBoundingClientRect().width + 20;
-    return Math.max(1, Math.floor((carrossel.clientWidth + 20) / passo));
+    return card ? card.getBoundingClientRect().height + 12 : 0;
+  };
+  const visiveis = () => {
+    const p = passo();
+    return p > 0 && carrossel ? Math.max(1, Math.floor((carrossel.clientHeight + 12) / p)) : 4;
   };
   const ir = () => {
     const max = Math.max(0, total - visiveis());
     indice = indice >= max ? 0 : indice + 1;
-    const card = faixa.querySelector(".card");
-    const passo = card ? card.getBoundingClientRect().width + 20 : 0;
-    faixa.style.transform = `translateX(-${indice * passo}px)`;
+    faixa.style.transform = `translateY(-${indice * passo()}px)`;
   };
   const parar = () => clearInterval(carrosselTimer);
   const comecar = () => {
@@ -258,12 +275,21 @@ function iniciarCarrosselNovidades() {
   }
   window.addEventListener("resize", () => {
     indice = 0;
-    faixa.style.transform = "translateX(0)";
+    faixa.style.transform = "translateY(0)";
   });
 }
 
 function iniciarHome() {
-  renderizarSecaoHome("lista-novidades", produtos.filter(p => p.novo));
+  const novos = produtos.filter(p => p.novo);
+  const divNov = document.getElementById("lista-novidades");
+  if (divNov) {
+    if (!novos.length) {
+      const s = document.getElementById("novidades");
+      if (s) s.style.display = "none";
+    } else {
+      divNov.innerHTML = novos.map(cardProdutoLinha).join("");
+    }
+  }
   renderizarSecaoHome("lista-mais-vendidos", produtos.filter(p => p.bestseller));
   renderizarSecaoHome("lista-destaques", produtos.filter(p => p.destaque));
   iniciarCarrosselNovidades();
