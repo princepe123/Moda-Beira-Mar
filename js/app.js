@@ -78,6 +78,16 @@ function atualizarBadge() {
   });
 }
 
+function aplicarLogo() {
+  const img = document.getElementById("hero-logo");
+  if (img) {
+    if (CONFIG.logo) { img.src = CONFIG.logo; img.style.display = "block"; }
+    else img.style.display = "none";
+  }
+  const nome = document.getElementById("hero-logo-nome");
+  if (nome) nome.textContent = CONFIG.logoNome || "";
+}
+
 function aplicarCores() {
   const r = document.documentElement.style;
   r.setProperty("--primaria", CONFIG.corPrimaria);
@@ -93,7 +103,7 @@ function renderizarCabecalho() {
   el.innerHTML = `
     <header class="topo">
       <div class="container topo-inner">
-        <a class="logo" href="index.html">${CONFIG.nomeLoja}</a>
+        <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.nomeLoja}">` : ""}${CONFIG.nomeLoja}</a>
         <nav class="nav">
           <div class="menu-opcoes" id="menu-opcoes">
             <button type="button" class="opcoes-btn" id="btn-opcoes">Opções ▾</button>
@@ -637,6 +647,7 @@ function abrirToast(msg) {
 
 document.addEventListener("DOMContentLoaded", () => {
   aplicarCores();
+  aplicarLogo();
   renderizarCabecalho();
   renderizarRodape();
   atualizarBadge();

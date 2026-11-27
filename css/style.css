@@ -39,6 +39,9 @@ a { color: inherit; }
 .topo { position: sticky; top: 0; background: var(--branco); border-bottom: 1px solid var(--borda); z-index: 50; }
 .topo-inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 10px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; color: var(--primaria); display: flex; align-items: center; gap: 8px; }
+.logo-img { height: 36px; width: 36px; object-fit: cover; border-radius: 50%; }
+.hero-logo { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,.35); margin-bottom: 8px; }
+.hero-logo-nome { font-weight: 800; font-size: 1.3rem; letter-spacing: .05em; color: #fff; margin-bottom: 12px; }
 .nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
 .nav a { text-decoration: none; color: var(--texto); font-weight: 500; font-size: .95rem; }
 .nav a:hover { color: var(--destaque); }
@@ -189,6 +192,8 @@ a { color: inherit; }
 
 @media (max-width: 768px) {
   .hero { padding: 56px 0; }
+  .hero-logo { width: 88px; height: 88px; }
+  .logo-img { height: 30px; width: 30px; }
   .hero h1 { font-size: 1.9rem; }
   .beneficios { grid-template-columns: 1fr; }
   .detalhe { grid-template-columns: 1fr; padding-top: 30px; }

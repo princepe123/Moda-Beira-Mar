@@ -16,6 +16,8 @@ const CONFIG = {
   corDestaque: "#e11d48",
   corWhatsApp: "#25d366",
   imagemFundo: "fotos/fundo-site.png",
+  logo: "fotos/logo.png",
+  logoNome: "à Beira-Mar",
   taxaEntrega: 15.0,
   entregaGratisAcimaDe: 200.0,
   formasPagamento: "PayPal, MB WAY ou transferência bancária",

@@ -64,7 +64,7 @@ O menu **Opções** no topo do site (estilo "settings") lista as categorias prin
 
 ### 3. Cores e fundo — também em `js/config.js`
 
-`corPrimaria`, `corDestaque` e `corWhatsApp` (formato `#rrggbb`) e `imagemFundo` (caminho da imagem de fundo do site, ex.: `"fotos/fundo-site.png"`; se ficar vazio `""`, usa só a cor de fundo). Para mudar o fundo, basta substituir o ficheiro indicado em `imagemFundo`.
+`corPrimaria`, `corDestaque` e `corWhatsApp` (formato `#rrggbb`), `imagemFundo` (caminho da imagem de fundo, ex.: `"fotos/fundo-site.png"`; vazio `""` = só cor) e `logo` + `logoNome` (imagem do logótipo no cabeçalho e centrada no início da página, com o nome ao lado, ex.: `"fotos/logo.png"` e `"à Beira-Mar"`; vazio `""` = só texto).
 
 ## Como publicar de graça
 
