@@ -232,73 +232,53 @@ function renderizarSecaoHome(idLista, lista) {
   div.innerHTML = lista.map(cardProduto).join("");
 }
 
-function cardProdutoLinha(p) {
-  const desconto = p.precoAntigo ? Math.round((1 - p.preco / p.precoAntigo) * 100) : 0;
-  return `
-    <article class="card card-linha">
-      <a class="card-img-linha" href="produto.html?id=${p.id}" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
-        ${midiaProduto(p, "item-foto")}
-        ${p.novo ? `<span class="tag-novo tag-linha">NOVO</span>` : ""}
-      </a>
-      <div class="card-corpo-linha">
-        <span class="card-cat">${p.categoria}</span>
-        <h3 class="card-nome"><a href="produto.html?id=${p.id}">${p.nome}</a></h3>
-        <p class="card-preco">${p.precoAntigo ? `<s>${formatarPreco(p.precoAntigo)}</s>` : ""}<strong>${formatarPreco(p.preco)}</strong>${desconto ? ` <span class="tag-desconto-inline">-${desconto}%</span>` : ""}</p>
-      </div>
-      <button class="btn btn-adicionar-linha" onclick="adicionarAoCarrinho(${p.id})">Adicionar</button>
-    </article>`;
-}
-
 let carrosselTimer = null;
 
 function iniciarCarrosselNovidades() {
   const faixa = document.getElementById("lista-novidades");
-  if (!faixa) return;
-  const total = faixa.children.length;
-  if (total <= 4) return;
   const carrossel = document.getElementById("carrossel-novidades");
+  if (!faixa || !carrossel) return;
+  const total = faixa.children.length;
   let indice = 0;
   const passo = () => {
     const card = faixa.querySelector(".card");
-    return card ? card.getBoundingClientRect().height + 12 : 0;
+    return card ? card.getBoundingClientRect().width + 20 : 0;
   };
   const visiveis = () => {
     const p = passo();
-    return p > 0 && carrossel ? Math.max(1, Math.floor((carrossel.clientHeight + 12) / p)) : 4;
+    return p > 0 ? Math.max(1, Math.floor((carrossel.clientWidth + 20) / p)) : 4;
   };
-  const ir = () => {
+  const aplicar = () => {
+    faixa.style.transform = `translateX(-${indice * passo()}px)`;
+  };
+  const ir = (delta) => {
     const max = Math.max(0, total - visiveis());
-    indice = indice >= max ? 0 : indice + 1;
-    faixa.style.transform = `translateY(-${indice * passo()}px)`;
+    indice += delta;
+    if (indice > max) indice = 0;
+    if (indice < 0) indice = max;
+    aplicar();
   };
   const parar = () => clearInterval(carrosselTimer);
   const comecar = () => {
     parar();
-    carrosselTimer = setInterval(ir, 3000);
+    carrosselTimer = setInterval(() => ir(1), 3500);
     if (carrosselTimer.unref) carrosselTimer.unref();
   };
-  comecar();
-  if (carrossel) {
-    carrossel.addEventListener("mouseenter", parar);
-    carrossel.addEventListener("mouseleave", comecar);
-  }
+  if (total > visiveis()) comecar();
+  carrossel.addEventListener("mouseenter", parar);
+  carrossel.addEventListener("mouseleave", () => { if (total > visiveis()) comecar(); });
+  const prev = document.getElementById("car-prev");
+  const next = document.getElementById("car-next");
+  if (prev) prev.addEventListener("click", () => { parar(); ir(-1); });
+  if (next) next.addEventListener("click", () => { parar(); ir(1); });
   window.addEventListener("resize", () => {
     indice = 0;
-    faixa.style.transform = "translateY(0)";
+    aplicar();
   });
 }
 
 function iniciarHome() {
-  const novos = produtos.filter(p => p.novo);
-  const divNov = document.getElementById("lista-novidades");
-  if (divNov) {
-    if (!novos.length) {
-      const s = document.getElementById("novidades");
-      if (s) s.style.display = "none";
-    } else {
-      divNov.innerHTML = novos.map(cardProdutoLinha).join("");
-    }
-  }
+  renderizarSecaoHome("lista-novidades", produtos.filter(p => p.novo));
   renderizarSecaoHome("lista-mais-vendidos", produtos.filter(p => p.bestseller));
   renderizarSecaoHome("lista-destaques", produtos.filter(p => p.destaque));
   iniciarCarrosselNovidades();
