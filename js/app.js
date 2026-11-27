@@ -103,7 +103,7 @@ function renderizarCabecalho() {
   el.innerHTML = `
     <header class="topo">
       <div class="container topo-inner">
-        <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.nomeLoja}">` : ""}${CONFIG.nomeLoja}</a>
+        <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}${CONFIG.logoNome || CONFIG.nomeLoja}</a>
         <nav class="nav">
           <div class="menu-opcoes" id="menu-opcoes">
             <button type="button" class="opcoes-btn" id="btn-opcoes">Opções ▾</button>
