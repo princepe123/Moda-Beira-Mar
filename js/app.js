@@ -94,7 +94,16 @@ function renderizarCabecalho() {
       <div class="container topo-inner">
         <a class="logo" href="index.html"><span class="logo-emoji">🛍️</span> ${CONFIG.nomeLoja}</a>
         <nav class="nav">
-          <a href="index.html?cat=Crianças#catalogo" class="aba-destaque">👶 Crianças</a>
+          <div class="menu-opcoes" id="menu-opcoes">
+            <button type="button" class="opcoes-btn" id="btn-opcoes">☰ Opções ▾</button>
+            <div class="opcoes-lista" id="lista-opcoes">
+              <a href="index.html?cat=Crianças#catalogo">👶 Crianças</a>
+              <a href="index.html?cat=Mulher#catalogo">👩 Mulher</a>
+              <a href="index.html?cat=Homem#catalogo">👨 Homem</a>
+              <a href="index.html?cat=Praia#catalogo">🏖️ Praia</a>
+              <a href="index.html?cat=Acessórios#catalogo">👜 Acessórios</a>
+            </div>
+          </div>
           <a href="index.html">Início</a>
           <a href="index.html#catalogo">Produtos</a>
           <a href="nossa-loja.html">Nossa Loja</a>
@@ -104,6 +113,15 @@ function renderizarCabecalho() {
     </header>`;
   const w = document.getElementById("botao-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
+  const menu = document.getElementById("menu-opcoes");
+  const btn = document.getElementById("btn-opcoes");
+  if (menu && btn) {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      menu.classList.toggle("aberto");
+    });
+    document.addEventListener("click", () => menu.classList.remove("aberto"));
+  }
 }
 
 function renderizarRodape() {

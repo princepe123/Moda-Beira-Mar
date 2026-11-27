@@ -48,7 +48,7 @@ Cada produto é um objeto dentro do array `produtos`:
 
 Basta copiar um bloco existente, mudar os valores e salvar. Para usar fotos reais no lugar dos emojis, troque o `emoji` por uma tag `<img src="...">` no campo e ajuste o CSS se necessário.
 
-A aba destacada **👶 Crianças** no topo do site abre o catálogo já filtrado: `index.html?cat=Crianças#catalogo`. Para criar outra aba assim, basta usar `index.html?cat=NOME_DA_CATEGORIA#catalogo` com o nome exato da categoria.
+O menu **☰ Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`.
 
 ### 3. Cores — também em `js/config.js`
 

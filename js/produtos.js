@@ -2,7 +2,7 @@ const produtos = [
   {
     id: 1,
     nome: "Camiseta Básica Algodão",
-    categoria: "Camisetas",
+    categoria: "Homem",
     preco: 49.9,
     precoAntigo: 69.9,
     emoji: "👕",
@@ -12,7 +12,7 @@ const produtos = [
   {
     id: 2,
     nome: "Camiseta Estampada",
-    categoria: "Camisetas",
+    categoria: "Mulher",
     preco: 59.9,
     precoAntigo: null,
     emoji: "👕",
@@ -22,7 +22,7 @@ const produtos = [
   {
     id: 3,
     nome: "Vestido Floral",
-    categoria: "Vestidos",
+    categoria: "Mulher",
     preco: 129.9,
     precoAntigo: null,
     emoji: "👗",
@@ -32,7 +32,7 @@ const produtos = [
   {
     id: 4,
     nome: "Vestido Social Preto",
-    categoria: "Vestidos",
+    categoria: "Mulher",
     preco: 149.9,
     precoAntigo: 189.9,
     emoji: "👗",
@@ -42,7 +42,7 @@ const produtos = [
   {
     id: 5,
     nome: "Calça Jeans Slim",
-    categoria: "Calças",
+    categoria: "Homem",
     preco: 119.9,
     precoAntigo: null,
     emoji: "👖",
@@ -52,7 +52,7 @@ const produtos = [
   {
     id: 6,
     nome: "Calça Chino",
-    categoria: "Calças",
+    categoria: "Mulher",
     preco: 99.9,
     precoAntigo: 129.9,
     emoji: "👖",
@@ -62,7 +62,7 @@ const produtos = [
   {
     id: 7,
     nome: "Tênis Casual Branco",
-    categoria: "Calçados",
+    categoria: "Homem",
     preco: 179.9,
     precoAntigo: null,
     emoji: "👟",
@@ -72,7 +72,7 @@ const produtos = [
   {
     id: 8,
     nome: "Sandália de Couro",
-    categoria: "Calçados",
+    categoria: "Mulher",
     preco: 139.9,
     precoAntigo: null,
     emoji: "👠",
@@ -87,7 +87,7 @@ const produtos = [
     precoAntigo: 229.9,
     emoji: "👜",
     cor: ["#e7e5e4", "#a8a29e"],
-    descricao: "Bolsa média em couro sintético de alta qualidade, alça ajustável e zíper interno. Cor marrom."
+    descricao: "Bolsa média em couro sintético de alta qualidade, alça ajustável e zíper interno. Cor castanha."
   },
   {
     id: 10,
@@ -102,7 +102,7 @@ const produtos = [
   {
     id: 11,
     nome: "Boné Preto Ajustável",
-    categoria: "Acessórios",
+    categoria: "Homem",
     preco: 49.9,
     precoAntigo: null,
     emoji: "🧢",
@@ -168,5 +168,45 @@ const produtos = [
     emoji: "🎒",
     cor: ["#ede9fe", "#a78bfa"],
     descricao: "Mochila escolar resistente com 2 compartimentos e alças acolchoadas. Várias cores."
+  },
+  {
+    id: 18,
+    nome: "Biquíni",
+    categoria: "Praia",
+    preco: 29.9,
+    precoAntigo: null,
+    emoji: "👙",
+    cor: ["#fce7f3", "#f9a8d4"],
+    descricao: "Biquíni em licra de secagem rápida, com forro. Tamanhos P a GG."
+  },
+  {
+    id: 19,
+    nome: "Sunga",
+    categoria: "Praia",
+    preco: 24.9,
+    precoAntigo: null,
+    emoji: "🩳",
+    cor: ["#cffafe", "#67e8f9"],
+    descricao: "Sunga masculina de secagem rápida, com cordão ajustável. Tamanhos P a GG."
+  },
+  {
+    id: 20,
+    nome: "Chapéu de Palha",
+    categoria: "Praia",
+    preco: 19.9,
+    precoAntigo: 24.9,
+    emoji: "🎩",
+    cor: ["#fef3c7", "#fbbf24"],
+    descricao: "Chapéu de palha com aba larga e proteção UV, ideal para a praia."
+  },
+  {
+    id: 21,
+    nome: "Chinelos de Borracha",
+    categoria: "Praia",
+    preco: 14.9,
+    precoAntigo: null,
+    emoji: "🩴",
+    cor: ["#e0f2fe", "#7dd3fc"],
+    descricao: "Chinelos de borracha antiderrapantes, resistentes à água e à areia. Tamanhos 36 a 44."
   }
 ];
