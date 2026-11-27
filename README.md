@@ -28,8 +28,14 @@ paypal: "",                 // link PayPal.Me ou e-mail PayPal — se vazio, nã
 formasPagamento: "PayPal, MB WAY ou transferência bancária",
 notaSinal: "Para levantar na loja é obrigatório um sinal de 10% do valor total; prazo de 3 dias úteis.",
 sinalMinimo: 0.1,           // 10% de sinal obrigatório no levantamento na loja física
-prazoRetiradaDiasUteis: 3   // dias úteis que o cliente tem para levantar a encomenda na loja
+prazoRetiradaDiasUteis: 3,  // dias úteis que o cliente tem para levantar a encomenda na loja
+mbway: "",                 // número MB WAY para pagamento do sinal
+iban: "",                  // IBAN para transferência do sinal
+notaAceite: "Encomenda aceite! Podes ir levantar a partir de {data}.",
+notaSaldo: "Passado o prazo, a encomenda é cancelada e o valor volta como saldo da loja (não ao banco)."
 ```
+
+**Fluxo de levantamento na loja** (`carrinho.html` → "Retirar na loja física"): o site calcula o sinal (10%) automaticamente, mostra as instruções de pagamento e só depois do pagamento apresenta o código de retirada, com nota de encomenda aceite, data/hora mínima de levantamento e um contador ao vivo (dias/horas/minutos) até ao fim do prazo. Se algum produto tiver `fornecedorDias: N` (ex.: produto que vem do fornecedor), o site avisa o motivo e pergunta se o cliente aceita esperar esses dias antes de pagar. Passado o prazo, a encomenda é cancelada e o valor fica como **saldo da loja**.
 
 No checkout (`carrinho.html`) o cliente escolhe **entrega em morada** (aparece um campo "Morada de entrega") ou **levantamento na loja física** (mostra o código de retirada, o valor do sinal de 10% e o prazo de 3 dias úteis). O pedido final é enviado pelo WhatsApp com todos estes dados.
 

@@ -3,6 +3,8 @@ const CONFIG = {
   slogan: "Roupas e acessórios à beira-mar — compra online e recebe em casa ou retira na loja física",
   whatsapp: "351000000000",
   paypal: "",
+  mbway: "",
+  iban: "",
   endereco: "Terminal",
   cep: "00000-000",
   plusCode: "JWW3+XP Seixal",
@@ -18,5 +20,7 @@ const CONFIG = {
   formasPagamento: "PayPal, MB WAY ou transferência bancária",
   notaSinal: "Para levantar na loja física é obrigatório pagar um sinal de 10% do valor total da encomenda, para garantir a reserva. Tens 3 dias úteis para levantar; passado esse prazo, o pedido é cancelado.",
   sinalMinimo: 0.1,
-  prazoRetiradaDiasUteis: 3
+  prazoRetiradaDiasUteis: 3,
+  notaAceite: "Encomenda aceite! Podes ir levantar o produto na loja a partir de {data}.",
+  notaSaldo: "Se passares do prazo de levantamento, a encomenda é cancelada e o valor pago volta como saldo da loja — não é devolvido ao banco nem ao método de pagamento — e podes usar esse saldo para comprar outra coisa no futuro."
 };

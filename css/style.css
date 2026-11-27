@@ -145,6 +145,10 @@ a { color: inherit; }
 .pedido-ok h2 { margin-bottom: 10px; }
 .pedido-ok p { color: #065f46; margin: 6px 0; }
 .codigo { font-size: 2rem; letter-spacing: .25em; color: var(--primaria); background: #fff; padding: 8px 20px 8px 28px; border-radius: 10px; display: inline-block; margin: 10px 0; font-weight: 800; }
+.aviso-atraso { background: #fff7ed; border: 1px solid #fdba74; border-radius: 10px; padding: 12px 14px; margin: 12px 0; color: #7c2d12; }
+.nota-saldo { font-size: .85rem; color: var(--cinza); margin-top: 14px; border-top: 1px dashed var(--borda); padding-top: 10px; }
+.pedido-ok ul { text-align: left; margin: 10px 0 14px 22px; }
+#contador-prazo { color: var(--destaque); }
 .pedido-ok .btn { margin-top: 14px; }
 
 .loja-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; }

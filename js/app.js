@@ -377,20 +377,26 @@ function finalizarPedido() {
   const url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
   const resultado = document.getElementById("resultado-pedido");
   if (forma === "retirada") {
-    const codigo = String(Math.floor(100000 + Math.random() * 900000));
+    const itens = carrinho.map(i => {
+      const p = produtoPorId(i.id);
+      return p ? { id: p.id, nome: p.nome, qtd: i.qtd, preco: p.preco } : null;
+    }).filter(Boolean);
     const total = subtotalCarrinho() + valorEntrega();
     const sinal = Math.ceil(total * CONFIG.sinalMinimo * 100) / 100;
-    resultado.innerHTML = `
-      <div class="pedido-ok">
-        <h2>Pedido registado!</h2>
-        <p>O seu código de retirada é:</p>
-        <span class="codigo">${codigo}</span>
-        <p>Apresente este código na nossa loja física:<br><strong>${CONFIG.endereco}, ${CONFIG.cidade}</strong></p>
-        <p>Pagamento: <strong>${CONFIG.formasPagamento}</strong>${CONFIG.paypal ? ` — PayPal: <a href="${CONFIG.paypal}" target="_blank" rel="noopener">${CONFIG.paypal}</a>` : ""}.</p>
-        <p>${CONFIG.notaSinal}</p>
-        <p>Sinal obrigatório neste pedido (${Math.round(CONFIG.sinalMinimo * 100)}%): <strong>${formatarPreco(sinal)}</strong> · Prazo para levantar: <strong>${CONFIG.prazoRetiradaDiasUteis} dias úteis</strong>.</p>
-        <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">Confirmar também pelo WhatsApp</a>
-      </div>`;
+    const atraso = maiorAtraso(itens);
+    encomendaAtiva = {
+      etapa: atraso.dias > 0 ? "atraso" : "pagamento",
+      codigo: null,
+      itens: itens,
+      total: total,
+      sinal: sinal,
+      atrasoDias: atraso.dias,
+      atrasoProduto: atraso.produto,
+      nome: nome, telefone: telefone, obs: obs, msg: msg, url: url,
+      dataAceite: null, dataLevantar: null, prazoAte: null,
+      status: "ativa"
+    };
+    renderizarEtapaRetirada();
   } else {
     resultado.innerHTML = `
       <div class="pedido-ok">
@@ -401,7 +407,164 @@ function finalizarPedido() {
   }
   limparCarrinho();
   renderizarCarrinho();
-  resultado.scrollIntoView({ behavior: "smooth" });
+  if (resultado) resultado.scrollIntoView({ behavior: "smooth" });
+}
+
+const ENCOMENDA_KEY = "encomenda_ativa_loja";
+let encomendaAtiva = null;
+let timerContador = null;
+
+function carregarEncomenda() {
+  try { return JSON.parse(localStorage.getItem(ENCOMENDA_KEY)); } catch (e) { return null; }
+}
+
+function salvarEncomenda(e) {
+  localStorage.setItem(ENCOMENDA_KEY, JSON.stringify(e));
+}
+
+function maiorAtraso(itens) {
+  let dias = 0, produto = null;
+  itens.forEach(i => {
+    const p = produtoPorId(i.id);
+    if (p && p.fornecedorDias > dias) { dias = p.fornecedorDias; produto = p.nome; }
+  });
+  return { dias: dias, produto: produto };
+}
+
+function diasUteisDepois(data, dias) {
+  const d = new Date(data.getTime());
+  let falta = dias;
+  while (falta > 0) {
+    d.setDate(d.getDate() + 1);
+    const diaSemana = d.getDay();
+    if (diaSemana !== 0 && diaSemana !== 6) falta--;
+  }
+  return d;
+}
+
+function formatarDataHora(d) {
+  return d.toLocaleString("pt-PT", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+}
+
+function textoContagem(alvo) {
+  const ms = alvo.getTime() - Date.now();
+  if (ms <= 0) return null;
+  const s = Math.floor(ms / 1000);
+  const dias = Math.floor(s / 86400);
+  const horas = Math.floor((s % 86400) / 3600);
+  const min = Math.floor((s % 3600) / 60);
+  const seg = s % 60;
+  return `${dias} dias, ${horas} horas, ${min} minutos e ${seg} segundos`;
+}
+
+function instrucoesPagamento() {
+  let html = `<p>Pagamento do sinal (${CONFIG.formasPagamento}):</p><ul>`;
+  if (CONFIG.paypal) html += `<li>PayPal: <a href="${CONFIG.paypal}" target="_blank" rel="noopener">${CONFIG.paypal}</a></li>`;
+  if (CONFIG.mbway) html += `<li>MB WAY: número <strong>${CONFIG.mbway}</strong></li>`;
+  if (CONFIG.iban) html += `<li>Transferência bancária: IBAN <strong>${CONFIG.iban}</strong></li>`;
+  html += `</ul>`;
+  return html;
+}
+
+function responderAtraso(aceita) {
+  if (!encomendaAtiva) return;
+  if (!aceita) {
+    encomendaAtiva.etapa = "cancelada";
+    encomendaAtiva.status = "cancelada";
+    salvarEncomenda(encomendaAtiva);
+    renderizarEtapaRetirada();
+    return;
+  }
+  encomendaAtiva.etapa = "pagamento";
+  renderizarEtapaRetirada();
+}
+
+function confirmarPagamentoSinal() {
+  if (!encomendaAtiva) return;
+  const agora = new Date();
+  encomendaAtiva.etapa = "aceite";
+  encomendaAtiva.codigo = String(Math.floor(100000 + Math.random() * 900000));
+  encomendaAtiva.dataAceite = agora.toISOString();
+  encomendaAtiva.dataLevantar = diasUteisDepois(agora, encomendaAtiva.atrasoDias).toISOString();
+  encomendaAtiva.prazoAte = diasUteisDepois(new Date(encomendaAtiva.dataLevantar), CONFIG.prazoRetiradaDiasUteis).toISOString();
+  salvarEncomenda(encomendaAtiva);
+  renderizarEtapaRetirada();
+}
+
+function renderizarEtapaRetirada() {
+  const r = document.getElementById("resultado-pedido");
+  if (!r || !encomendaAtiva) return;
+  const e = encomendaAtiva;
+  const pct = Math.round(CONFIG.sinalMinimo * 100);
+  if (e.etapa === "cancelada") {
+    r.innerHTML = `<div class="pedido-ok"><h2>Encomenda cancelada</h2><p>Escolheste não esperar. ${CONFIG.notaSaldo}</p></div>`;
+    r.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+  if (e.etapa === "atraso") {
+    r.innerHTML = `
+      <div class="pedido-ok">
+        <h2>Produto em falta na loja</h2>
+        <p class="aviso-atraso"><strong>Atenção:</strong> "${e.atrasoProduto}" não está disponível na loja física — tem de vir do fornecedor e demora <strong>${e.atrasoDias} dias</strong>.</p>
+        <p>Aceitas esperar esses ${e.atrasoDias} dias? Se aceitares, prosseguimos para o pagamento do sinal de <strong>${formatarPreco(e.sinal)}</strong> (${pct}% de ${formatarPreco(e.total)}).</p>
+        <button class="btn" onclick="responderAtraso(true)">Sim, aceito esperar ${e.atrasoDias} dias</button>
+        <button class="btn btn-claro" onclick="responderAtraso(false)">Não, quero cancelar</button>
+        <p class="nota-saldo">${CONFIG.notaSaldo}</p>
+      </div>`;
+    r.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+  if (e.etapa === "pagamento") {
+    r.innerHTML = `
+      <div class="pedido-ok">
+        <h2>Levantamento na loja — paga o sinal de ${pct}%</h2>
+        <p>Para a encomenda ser processada e aceite, paga o sinal automático de <strong>${formatarPreco(e.sinal)}</strong> (total da encomenda: <strong>${formatarPreco(e.total)}</strong>). O código de retirada só é fornecido depois do pagamento.</p>
+        ${instrucoesPagamento()}
+        <button class="btn btn-whatsapp" onclick="confirmarPagamentoSinal()">Já paguei o sinal</button>
+        <p class="nota-saldo">${CONFIG.notaSaldo}</p>
+      </div>`;
+    r.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+  if (e.etapa === "aceite") {
+    const alvo = new Date(e.prazoAte);
+    const levantar = new Date(e.dataLevantar);
+    const falta = textoContagem(alvo);
+    r.innerHTML = `
+      <div class="pedido-ok">
+        <h2>Encomenda aceite!</h2>
+        <p>${CONFIG.notaAceite.replace("{data}", formatarDataHora(levantar))}</p>
+        <p>O teu código de retirada é: <span class="codigo">${e.codigo}</span></p>
+        <p>Apresenta este código na loja: <strong>${CONFIG.endereco}, ${CONFIG.cidade}</strong></p>
+        <p>🗓️ Podes levantar a partir de <strong>${formatarDataHora(levantar)}</strong> (${e.atrasoDias > 0 ? `espera de ${e.atrasoDias} dias do fornecedor` : "já disponível na loja"})<br>
+        ⏳ Tens até <strong>${formatarDataHora(alvo)}</strong> (${CONFIG.prazoRetiradaDiasUteis} dias úteis) para levantar — faltam <strong id="contador-prazo">${falta || "prazo esgotado"}</strong>.</p>
+        <p class="nota-saldo">${CONFIG.notaSaldo}</p>
+        <a class="btn btn-whatsapp" href="${e.url}" target="_blank" rel="noopener">Confirmar também pelo WhatsApp</a>
+      </div>`;
+    iniciarContador(alvo);
+    r.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+function iniciarContador(alvo) {
+  clearInterval(timerContador);
+  timerContador = setInterval(() => {
+    const el = document.getElementById("contador-prazo");
+    if (!el) { clearInterval(timerContador); return; }
+    const falta = textoContagem(alvo);
+    if (falta === null) {
+      el.textContent = "prazo esgotado — a encomenda foi cancelada e o valor ficou como saldo na loja";
+      if (encomendaAtiva && encomendaAtiva.status !== "cancelada") {
+        encomendaAtiva.status = "cancelada";
+        encomendaAtiva.etapa = "cancelada";
+        salvarEncomenda(encomendaAtiva);
+      }
+      clearInterval(timerContador);
+      return;
+    }
+    el.textContent = falta;
+  }, 1000);
+  if (timerContador.unref) timerContador.unref();
 }
 
 function iniciarCarrinho() {
@@ -420,6 +583,11 @@ function iniciarCarrinho() {
     lp.innerHTML = `Pagamento com PayPal: <a href="${CONFIG.paypal}" target="_blank" rel="noopener">${CONFIG.paypal}</a>`;
   }
   document.getElementById("btn-finalizar").addEventListener("click", finalizarPedido);
+  const enc = carregarEncomenda();
+  if (enc && enc.etapa === "aceite") {
+    encomendaAtiva = enc;
+    renderizarEtapaRetirada();
+  }
   const te = document.getElementById("texto-entrega");
   if (te) {
     te.textContent = `Entrega na tua zona por ${formatarPreco(CONFIG.taxaEntrega)}` +

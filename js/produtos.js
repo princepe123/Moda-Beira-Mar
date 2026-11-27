@@ -109,6 +109,7 @@ const produtos = [
     categoria: "Acessórios",
     preco: 249.9,
     precoAntigo: 299.9,
+    fornecedorDias: 5,
     cor: ["#e0e7ff", "#6366f1"],
     descricao: "Relógio analógico com pulseira de couro, mostrador de 40 mm e resistência à água."
   },
