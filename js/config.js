@@ -13,5 +13,8 @@ const CONFIG = {
   corDestaque: "#e11d48",
   corWhatsApp: "#25d366",
   taxaEntrega: 15.0,
-  entregaGratisAcimaDe: 200.0
+  entregaGratisAcimaDe: 200.0,
+  formasPagamento: "MB WAY, transferência bancária ou dinheiro na loja",
+  notaSinal: "Pagamento em dinheiro na loja exige um sinal de pelo menos 1/3 do valor do pedido, para garantir a retirada. O restante é pago no levantamento.",
+  sinalMinimo: 1 / 3
 };

@@ -24,6 +24,9 @@ endereco: "Terminal",
 cep: "00000-000",           // se deixar "00000-000", o CEP não aparece no site
 plusCode: "JWW3+XP Seixal", // Plus Code do Google Maps — usado no link "Abrir no Google Maps"
 cidade: "Seixal, Setúbal",
+formasPagamento: "MB WAY, transferência bancária ou dinheiro na loja",
+notaSinal: "Pagamento em dinheiro na loja exige um sinal de pelo menos 1/3 do valor do pedido, para garantir a retirada.",
+sinalMinimo: 1 / 3,          // fração mínima do total como sinal na retirada em dinheiro
 ```
 
 ### 2. Produtos — `js/produtos.js`

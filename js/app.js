@@ -310,9 +310,12 @@ function montarMensagemPedido(forma, nome, telefone, obs) {
   const sub = subtotalCarrinho();
   const ent = valorEntrega();
   let msg = `Olá! Quero fazer um pedido na *${CONFIG.nomeLoja}* 🛍️\n\n${linhas.join("\n")}\n\nSubtotal: ${formatarPreco(sub)}\n`;
-  msg += forma === "retirada"
-    ? "Forma: retirada na loja física (grátis)\n"
-    : `Entrega: ${ent === 0 ? "grátis" : formatarPreco(ent)}\nEndereço de entrega: (informar no chat)\n`;
+  if (forma === "retirada") {
+    const sinal = Math.ceil((sub + ent) * CONFIG.sinalMinimo * 100) / 100;
+    msg += `Forma: retirada na loja física (grátis)\nSinal mínimo em dinheiro na loja (1/3 do total): ${formatarPreco(sinal)}\n`;
+  } else {
+    msg += `Entrega: ${ent === 0 ? "grátis" : formatarPreco(ent)}\nEndereço de entrega: (informar no chat)\n`;
+  }
   msg += `*Total: ${formatarPreco(sub + ent)}*`;
   if (nome) msg += `\nNome: ${nome}`;
   if (telefone) msg += `\nCelular: ${telefone}`;
@@ -332,13 +335,16 @@ function finalizarPedido() {
   const resultado = document.getElementById("resultado-pedido");
   if (forma === "retirada") {
     const codigo = String(Math.floor(100000 + Math.random() * 900000));
+    const total = subtotalCarrinho() + valorEntrega();
+    const sinal = Math.ceil(total * CONFIG.sinalMinimo * 100) / 100;
     resultado.innerHTML = `
       <div class="pedido-ok">
         <h2>✅ Pedido registrado!</h2>
         <p>Seu código de retirada é:</p>
         <span class="codigo">${codigo}</span>
         <p>Apresente este código na nossa loja física:<br><strong>${CONFIG.endereco}, ${CONFIG.cidade}</strong></p>
-        <p>Você paga na retirada (Pix, cartão ou dinheiro).</p>
+        <p>Pagamento na retirada: <strong>${CONFIG.formasPagamento}</strong>.</p>
+        <p>${CONFIG.notaSinal}<br>Sinal mínimo neste pedido: <strong>${formatarPreco(sinal)}</strong>.</p>
         <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">💬 Confirmar também pelo WhatsApp</a>
       </div>`;
   } else {
@@ -365,6 +371,8 @@ function iniciarCarrinho() {
     te.textContent = `Entrega na sua região por ${formatarPreco(CONFIG.taxaEntrega)}` +
       (CONFIG.entregaGratisAcimaDe > 0 ? ` — grátis em compras acima de ${formatarPreco(CONFIG.entregaGratisAcimaDe)}` : "") + ".";
   }
+  const tr = document.getElementById("texto-retirada");
+  if (tr) tr.textContent = "Retirada grátis — geramos um código para você apresentar na loja. " + CONFIG.notaSinal;
 }
 
 function preencherPaginaLoja() {
@@ -379,6 +387,8 @@ function preencherPaginaLoja() {
   set("info-whatsapp", "+" + CONFIG.whatsapp);
   set("info-email", CONFIG.email);
   set("info-instagram", CONFIG.instagram);
+  set("formas-pagamento", CONFIG.formasPagamento + ".");
+  set("nota-sinal", CONFIG.notaSinal);
   const maps = document.getElementById("link-maps");
   if (maps) {
     const q = CONFIG.plusCode ? `${CONFIG.plusCode}, ${CONFIG.cidade}` : `${CONFIG.endereco}, ${CONFIG.cidade} ${CONFIG.cep}`;
@@ -407,6 +417,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderizarCabecalho();
   renderizarRodape();
   atualizarBadge();
+  const tph = document.getElementById("texto-pagamento-home");
+  if (tph) tph.textContent = CONFIG.formasPagamento + " — na entrega ou na retirada.";
   if (document.getElementById("lista-produtos")) iniciarCatalogo();
   if (document.getElementById("detalhe-produto")) iniciarDetalhe();
   if (document.getElementById("lista-carrinho")) iniciarCarrinho();
