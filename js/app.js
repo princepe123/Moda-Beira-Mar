@@ -103,6 +103,21 @@ function renderizarCabecalho() {
   el.innerHTML = `
     <header class="topo">
       <div class="container topo-inner">
+        <div class="menu-opcoes menu-topo" id="menu-opcoes">
+          <button type="button" class="opcoes-btn btn-menu" id="btn-opcoes" aria-label="Menu">☰</button>
+          <div class="opcoes-lista" id="lista-opcoes">
+            <a href="index.html?cat=Crianças#catalogo">Crianças</a>
+            <a href="index.html?cat=Mulher#catalogo">Mulher</a>
+            <a href="index.html?cat=Homem#catalogo">Homem</a>
+            <a href="index.html?cat=Praia#catalogo">Praia</a>
+            <a href="index.html?cat=Acessórios#catalogo">Acessórios</a>
+            <div class="opcoes-div"></div>
+            <a href="index.html">Início</a>
+            <a href="index.html#catalogo">Produtos</a>
+            <a href="nossa-loja.html">Nossa Loja</a>
+            <a href="carrinho.html">Carrinho <span class="badge-carrinho">0</span></a>
+          </div>
+        </div>
         <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}<span class="logo-texto"><span class="logo-nome">${CONFIG.logoNome || CONFIG.nomeLoja}</span><span class="logo-slogan">${CONFIG.slogan}</span></span></a>
         <form class="busca-topo" id="form-busca-topo">
           <input type="search" id="busca-topo" placeholder="Procura por produto, coleção..." autocomplete="off">
@@ -117,6 +132,15 @@ function renderizarCabecalho() {
     const q = document.getElementById("busca-topo").value.trim();
     location.href = "index.html?q=" + encodeURIComponent(q) + "#catalogo";
   });
+  const menu = document.getElementById("menu-opcoes");
+  const btn = document.getElementById("btn-opcoes");
+  if (menu && btn) {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      menu.classList.toggle("aberto");
+    });
+    document.addEventListener("click", () => menu.classList.remove("aberto"));
+  }
 }
 
 function renderizarRodape() {
@@ -125,22 +149,6 @@ function renderizarRodape() {
   el.innerHTML = `
     <footer class="rodape">
       <div class="container">
-        <nav class="nav nav-rodape">
-          <div class="menu-opcoes" id="menu-opcoes">
-            <button type="button" class="opcoes-btn" id="btn-opcoes">☰ Opções ▾</button>
-            <div class="opcoes-lista" id="lista-opcoes">
-              <a href="index.html?cat=Crianças#catalogo">Crianças</a>
-              <a href="index.html?cat=Mulher#catalogo">Mulher</a>
-              <a href="index.html?cat=Homem#catalogo">Homem</a>
-              <a href="index.html?cat=Praia#catalogo">Praia</a>
-              <a href="index.html?cat=Acessórios#catalogo">Acessórios</a>
-            </div>
-          </div>
-          <a href="index.html">Início</a>
-          <a href="index.html#catalogo">Produtos</a>
-          <a href="nossa-loja.html">Nossa Loja</a>
-          <a href="carrinho.html" class="link-carrinho">Carrinho <span class="badge-carrinho">0</span></a>
-        </nav>
         <div class="rodape-grid">
           <div>
             <h3>${CONFIG.nomeLoja}</h3>
@@ -160,15 +168,6 @@ function renderizarRodape() {
     </footer>`;
   const w = document.getElementById("rodape-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
-  const menu = document.getElementById("menu-opcoes");
-  const btn = document.getElementById("btn-opcoes");
-  if (menu && btn) {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      menu.classList.toggle("aberto");
-    });
-    document.addEventListener("click", () => menu.classList.remove("aberto"));
-  }
 }
 
 function midiaProduto(p, classeImg) {
