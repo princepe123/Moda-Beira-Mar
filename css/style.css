@@ -31,6 +31,8 @@ a { color: inherit; }
 .nav a { text-decoration: none; color: var(--texto); font-weight: 500; font-size: .95rem; }
 .nav a:hover { color: var(--destaque); }
 .link-carrinho { background: var(--primaria); color: #fff !important; padding: 8px 14px; border-radius: 999px; display: inline-flex; align-items: center; }
+.aba-destaque { background: var(--destaque); color: #fff !important; padding: 8px 16px; border-radius: 999px; font-weight: 800; text-transform: uppercase; font-size: .85rem; letter-spacing: .05em; }
+.aba-destaque:hover { filter: brightness(1.12); color: #fff !important; }
 .badge-carrinho { display: none; background: var(--destaque); color: #fff; border-radius: 999px; min-width: 20px; height: 20px; font-size: .75rem; font-weight: 700; align-items: center; justify-content: center; padding: 0 5px; margin-left: 6px; }
 
 .hero { background: linear-gradient(135deg, var(--primaria), #374151); color: #fff; padding: 80px 0; text-align: center; }

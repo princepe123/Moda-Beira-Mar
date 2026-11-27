@@ -94,6 +94,7 @@ function renderizarCabecalho() {
       <div class="container topo-inner">
         <a class="logo" href="index.html"><span class="logo-emoji">🛍️</span> ${CONFIG.nomeLoja}</a>
         <nav class="nav">
+          <a href="index.html?cat=Crianças#catalogo" class="aba-destaque">👶 Crianças</a>
           <a href="index.html">Início</a>
           <a href="index.html#catalogo">Produtos</a>
           <a href="nossa-loja.html">Nossa Loja</a>
@@ -176,6 +177,11 @@ function renderizarCatalogo() {
 }
 
 function iniciarCatalogo() {
+  const catParam = new URLSearchParams(location.search).get("cat");
+  if (catParam) {
+    const encontrada = [...new Set(produtos.map(p => p.categoria))].find(c => c.toLowerCase() === catParam.toLowerCase());
+    if (encontrada) categoriaAtiva = encontrada;
+  }
   renderizarBotoesCategorias();
   renderizarCatalogo();
   document.getElementById("busca").addEventListener("input", e => {

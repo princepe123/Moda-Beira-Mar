@@ -118,5 +118,55 @@ const produtos = [
     emoji: "⌚",
     cor: ["#e0e7ff", "#6366f1"],
     descricao: "Relógio analógico com pulseira de couro, mostrador de 40 mm e resistência à água."
+  },
+  {
+    id: 13,
+    nome: "T-shirt Infantil Algodão",
+    categoria: "Crianças",
+    preco: 19.9,
+    precoAntigo: 24.9,
+    emoji: "👕",
+    cor: ["#fef9c3", "#fde047"],
+    descricao: "T-shirt 100% algodão para crianças, com estampas divertidas. Idades 2 a 10 anos."
+  },
+  {
+    id: 14,
+    nome: "Calça Jeans Kids",
+    categoria: "Crianças",
+    preco: 39.9,
+    precoAntigo: null,
+    emoji: "👖",
+    cor: ["#bfdbfe", "#60a5fa"],
+    descricao: "Jeans infantil com elástico ajustável na cintura. Idades 4 a 12 anos."
+  },
+  {
+    id: 15,
+    nome: "Vestido de Menina",
+    categoria: "Crianças",
+    preco: 34.9,
+    precoAntigo: null,
+    emoji: "👗",
+    cor: ["#fbcfe8", "#f472b6"],
+    descricao: "Vestido leve para meninas, com laço nas costas. Idades 3 a 10 anos."
+  },
+  {
+    id: 16,
+    nome: "Ténis Infantil",
+    categoria: "Crianças",
+    preco: 49.9,
+    precoAntigo: null,
+    emoji: "👟",
+    cor: ["#d1fae5", "#34d399"],
+    descricao: "Ténis infantil leve com fecho de velcro. Tamanhos 26 a 34."
+  },
+  {
+    id: 17,
+    nome: "Mochila Escolar",
+    categoria: "Crianças",
+    preco: 29.9,
+    precoAntigo: 39.9,
+    emoji: "🎒",
+    cor: ["#ede9fe", "#a78bfa"],
+    descricao: "Mochila escolar resistente com 2 compartimentos e alças acolchoadas. Várias cores."
   }
 ];
