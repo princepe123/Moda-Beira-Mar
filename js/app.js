@@ -104,10 +104,19 @@ function renderizarCabecalho() {
     <header class="topo">
       <div class="container topo-inner">
         <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}<span class="logo-texto"><span class="logo-nome">${CONFIG.logoNome || CONFIG.nomeLoja}</span><span class="logo-slogan">${CONFIG.slogan}</span></span></a>
+        <form class="busca-topo" id="form-busca-topo">
+          <input type="search" id="busca-topo" placeholder="Procura por produto, coleção..." autocomplete="off">
+        </form>
       </div>
     </header>`;
   const w = document.getElementById("botao-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
+  const form = document.getElementById("form-busca-topo");
+  if (form) form.addEventListener("submit", e => {
+    e.preventDefault();
+    const q = document.getElementById("busca-topo").value.trim();
+    location.href = "index.html?q=" + encodeURIComponent(q) + "#catalogo";
+  });
 }
 
 function renderizarRodape() {
@@ -296,10 +305,17 @@ function iniciarHome() {
 }
 
 function iniciarCatalogo() {
-  const catParam = new URLSearchParams(location.search).get("cat");
+  const params = new URLSearchParams(location.search);
+  const catParam = params.get("cat");
   if (catParam) {
     const encontrada = [...new Set(produtos.map(p => p.categoria))].find(c => c.toLowerCase() === catParam.toLowerCase());
     if (encontrada) categoriaAtiva = encontrada;
+  }
+  const q = params.get("q");
+  if (q) {
+    buscaAtiva = q;
+    const b = document.getElementById("busca");
+    if (b) b.value = q;
   }
   renderizarBotoesCategorias();
   renderizarCatalogo();

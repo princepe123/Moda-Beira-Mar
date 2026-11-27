@@ -6,7 +6,7 @@ Site de vendas completo e 100% estático (HTML + CSS + JavaScript puro): não pr
 
 - **Novidades** é um carrossel automático **vertical** (desce, não para o lado): mostra no máximo 4 produtos de cada vez em linhas e avança uma linha a cada 3 segundos (para ao passar o rato por cima; no telemóvel mostra 3 ou 2 linhas conforme a largura)
 
-- **Vitrine de produtos** com busca e filtro por categoria (`index.html`)
+- **Vitrine de produtos** com busca (barra no topo do site, estilo "Procura por produto, coleção...", que leva a `index.html?q=termo#catalogo`) e filtro por categoria (`index.html`)
 - **Página de produto** com quantidade e pedido direto pelo WhatsApp (`produto.html?id=1`)
 - **Carrinho de compras** salvo no navegador do cliente (`carrinho.html`)
 - **Checkout em duas formas**:
