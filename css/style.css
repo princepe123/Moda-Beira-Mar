@@ -40,6 +40,9 @@ a { color: inherit; }
 .topo-inner { position: relative; display: flex; align-items: center; justify-content: flex-start; min-height: 64px; gap: 10px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-weight: 800; font-size: 1.25rem; text-decoration: none; color: var(--primaria); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .logo-img { height: 36px; width: 36px; object-fit: cover; border-radius: 50%; }
+.logo-texto { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
+.logo-nome { font-weight: 800; font-size: 1.15rem; }
+.logo-slogan { font-size: .68rem; font-weight: 500; color: var(--cinza); margin-top: 3px; }
 .hero-logo { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,.35); margin-bottom: 8px; }
 .hero-logo-nome { font-weight: 800; font-size: 1.3rem; letter-spacing: .05em; color: #fff; margin-bottom: 12px; }
 .nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
