@@ -107,12 +107,13 @@ a { color: inherit; }
 .tag-mais-vendido { position: absolute; top: 38px; right: 10px; background: #d97706; color: #fff; font-size: .72rem; font-weight: 800; letter-spacing: .05em; padding: 4px 10px; border-radius: 999px; }
 .secao-home { padding-top: 34px; }
 .secao-home h2 { font-size: 1.5rem; margin-bottom: 18px; }
-.carrossel { overflow: hidden; }
+.carrossel { position: relative; overflow: hidden; }
 .carrossel-faixa { display: flex; gap: 20px; transition: transform .6s ease; will-change: transform; }
 .carrossel-faixa .card { flex: 0 0 calc((100% - 60px) / 4); }
-.carrossel-nav { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
-.car-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--borda); background: #fff; cursor: pointer; font-size: 1.15rem; line-height: 1; color: var(--texto); }
+.car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--borda); background: #fff; cursor: pointer; font-size: 1.15rem; line-height: 1; color: var(--texto); box-shadow: var(--sombra); }
 .car-btn:hover { background: var(--primaria); color: #fff; border-color: var(--primaria); }
+#car-prev { left: 8px; }
+#car-next { right: 8px; }
 @media (max-width: 900px) { .carrossel-faixa .card { flex-basis: calc((100% - 40px) / 3); } }
 @media (max-width: 640px) { .carrossel-faixa .card { flex-basis: calc((100% - 20px) / 2); } }
 @media (max-width: 440px) { .carrossel-faixa .card { flex-basis: 100%; } }
