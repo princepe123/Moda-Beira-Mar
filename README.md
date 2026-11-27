@@ -19,9 +19,9 @@ Site de vendas completo e 100% estático (HTML + CSS + JavaScript puro): não pr
 Altere nome, WhatsApp, endereço, horário, e-mail, Instagram, cores e valores de entrega:
 
 ```js
-whatsapp: "5511999998888",   // código do país (55) + DDD + número, só dígitos
+whatsapp: "351912345678",   // código do país (351) + número, só dígitos
 endereco: "Terminal",
-cep: "00000-000",           // se deixar "00000-000", o CEP não aparece no site
+cep: "2840-000",
 plusCode: "JWW3+XP Seixal", // Plus Code do Google Maps — usado no link "Abrir no Google Maps"
 cidade: "Seixal, Setúbal",
 formasPagamento: "MB WAY, transferência bancária ou dinheiro na loja",

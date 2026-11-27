@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +11,20 @@
 
   <main>
     <section class="pagina">
-      <h1>🛒 Seu carrinho</h1>
+      <h1>🛒 O teu carrinho</h1>
       <div id="resultado-pedido"></div>
       <div id="lista-carrinho"></div>
 
       <div id="area-pedido" style="display:none">
         <div class="resumo">
-          <h2>Resumo do pedido</h2>
+          <h2>Resumo da encomenda</h2>
           <div class="linha-resumo"><span>Subtotal</span><span id="resumo-subtotal"></span></div>
-          <div class="linha-resumo"><span>Entrega</span><span id="resumo-entrega"></span></div>
+          <div class="linha-resumo"><span>Portes de envio</span><span id="resumo-entrega"></span></div>
           <div class="linha-resumo total"><span>Total</span><span id="resumo-total"></span></div>
         </div>
 
         <div class="checkout">
-          <h2>Como deseja receber?</h2>
+          <h2>Como pretendes receber?</h2>
           <label class="opcao">
             <input type="radio" name="forma" value="entrega" checked>
             <span><strong>🚚 Entrega pelo WhatsApp</strong><small id="texto-entrega"></small></span>
@@ -35,19 +35,19 @@
           </label>
 
           <div class="campo">
-            <label for="nome">Seu nome</label>
+            <label for="nome">O teu nome</label>
             <input id="nome" type="text" placeholder="Nome completo" autocomplete="name">
           </div>
           <div class="campo">
-            <label for="telefone">Seu WhatsApp</label>
-            <input id="telefone" type="tel" placeholder="(00) 00000-0000" autocomplete="tel">
+            <label for="telefone">O teu telemóvel</label>
+            <input id="telefone" type="tel" placeholder="+351 900 000 000" autocomplete="tel">
           </div>
           <div class="campo">
             <label for="obs">Observações (opcional)</label>
-            <textarea id="obs" rows="2" placeholder="Tamanho, cor, endereço de entrega..."></textarea>
+            <textarea id="obs" rows="2" placeholder="Tamanho, cor, morada de entrega..."></textarea>
           </div>
 
-          <button id="btn-finalizar" class="btn">Finalizar pedido</button>
+          <button id="btn-finalizar" class="btn">Finalizar encomenda</button>
         </div>
       </div>
     </section>

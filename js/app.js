@@ -4,7 +4,7 @@ let categoriaAtiva = "todas";
 let buscaAtiva = "";
 
 function formatarPreco(v) {
-  return new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(v);
+  return new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR" }).format(v);
 }
 
 function getCarrinho() {
@@ -121,7 +121,7 @@ function renderizarRodape() {
             <p>📍 ${CONFIG.endereco}, ${CONFIG.cidade}${CONFIG.cep && CONFIG.cep !== "00000-000" ? " — CEP " + CONFIG.cep : ""}${CONFIG.plusCode ? `<br>🧭 ${CONFIG.plusCode}` : ""}<br>🕒 ${CONFIG.horario}</p>
           </div>
           <div>
-            <h3>Contato</h3>
+            <h3>Contacto</h3>
             <p><a id="rodape-whatsapp" target="_blank" rel="noopener">💬 WhatsApp da loja</a><br>✉️ ${CONFIG.email}<br>📸 ${CONFIG.instagram}</p>
           </div>
         </div>
@@ -172,7 +172,7 @@ function renderizarCatalogo() {
   );
   div.innerHTML = lista.length
     ? lista.map(cardProduto).join("")
-    : `<p class="vazio">Nenhum produto encontrado. Tente outra busca.</p>`;
+    : `<p class="vazio">Nenhum produto encontrado. Tente outra pesquisa.</p>`;
 }
 
 function iniciarCatalogo() {
@@ -195,7 +195,7 @@ function adicionarQtdDetalhe(id) {
 }
 
 function linkWhatsAppProduto(p) {
-  const msg = `Olá! Quero comprar pela site da *${CONFIG.nomeLoja}*:\n\n• ${p.nome} (x${qtdDetalhe}) — ${formatarPreco(p.preco * qtdDetalhe)}\n\nTotal: *${formatarPreco(p.preco * qtdDetalhe)}*`;
+  const msg = `Olá! Quero comprar no site da *${CONFIG.nomeLoja}*:\n\n• ${p.nome} (x${qtdDetalhe}) — ${formatarPreco(p.preco * qtdDetalhe)}\n\nTotal: *${formatarPreco(p.preco * qtdDetalhe)}*`;
   return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
 }
 
@@ -240,7 +240,7 @@ function iniciarDetalhe() {
   const relacionados = produtos.filter(x => x.categoria === p.categoria && x.id !== p.id).slice(0, 4);
   const secao = document.getElementById("relacionados");
   if (secao && relacionados.length) {
-    secao.innerHTML = `<h2>Você também pode gostar</h2><div class="grade">${relacionados.map(cardProduto).join("")}</div>`;
+    secao.innerHTML = `<h2>Também lhe pode interessar</h2><div class="grade">${relacionados.map(cardProduto).join("")}</div>`;
   }
 }
 
@@ -249,7 +249,7 @@ function renderizarCarrinho() {
   const carrinho = getCarrinho();
   const area = document.getElementById("area-pedido");
   if (!carrinho.length) {
-    div.innerHTML = `<div class="carrinho-vazio"><p>🛒 Seu carrinho está vazio.</p><a class="btn" href="index.html">Ver produtos</a></div>`;
+    div.innerHTML = `<div class="carrinho-vazio"><p>🛒 O teu carrinho está vazio.</p><a class="btn" href="index.html">Ver produtos</a></div>`;
     if (area) area.style.display = "none";
     return;
   }
@@ -314,11 +314,11 @@ function montarMensagemPedido(forma, nome, telefone, obs) {
     const sinal = Math.ceil((sub + ent) * CONFIG.sinalMinimo * 100) / 100;
     msg += `Forma: retirada na loja física (grátis)\nSinal mínimo em dinheiro na loja (1/3 do total): ${formatarPreco(sinal)}\n`;
   } else {
-    msg += `Entrega: ${ent === 0 ? "grátis" : formatarPreco(ent)}\nEndereço de entrega: (informar no chat)\n`;
+    msg += `Entrega: ${ent === 0 ? "grátis" : formatarPreco(ent)}\nEndereço de entrega: (indicar na conversa)\n`;
   }
   msg += `*Total: ${formatarPreco(sub + ent)}*`;
   if (nome) msg += `\nNome: ${nome}`;
-  if (telefone) msg += `\nCelular: ${telefone}`;
+  if (telefone) msg += `\nTelemóvel: ${telefone}`;
   if (obs) msg += `\nObservações: ${obs}`;
   return msg;
 }
@@ -339,8 +339,8 @@ function finalizarPedido() {
     const sinal = Math.ceil(total * CONFIG.sinalMinimo * 100) / 100;
     resultado.innerHTML = `
       <div class="pedido-ok">
-        <h2>✅ Pedido registrado!</h2>
-        <p>Seu código de retirada é:</p>
+        <h2>✅ Pedido registado!</h2>
+        <p>O seu código de retirada é:</p>
         <span class="codigo">${codigo}</span>
         <p>Apresente este código na nossa loja física:<br><strong>${CONFIG.endereco}, ${CONFIG.cidade}</strong></p>
         <p>Pagamento na retirada: <strong>${CONFIG.formasPagamento}</strong>.</p>
@@ -350,8 +350,8 @@ function finalizarPedido() {
   } else {
     resultado.innerHTML = `
       <div class="pedido-ok">
-        <h2>✅ Quase lá!</h2>
-        <p>Revise e envie seu pedido pelo WhatsApp da loja para confirmarmos a entrega:</p>
+        <h2>✅ Quase pronto!</h2>
+        <p>Reveja e envie o seu pedido pelo WhatsApp da loja para confirmarmos a entrega:</p>
         <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">💬 Enviar pedido no WhatsApp</a>
       </div>`;
   }
@@ -368,11 +368,11 @@ function iniciarCarrinho() {
   document.getElementById("btn-finalizar").addEventListener("click", finalizarPedido);
   const te = document.getElementById("texto-entrega");
   if (te) {
-    te.textContent = `Entrega na sua região por ${formatarPreco(CONFIG.taxaEntrega)}` +
+    te.textContent = `Entrega na tua zona por ${formatarPreco(CONFIG.taxaEntrega)}` +
       (CONFIG.entregaGratisAcimaDe > 0 ? ` — grátis em compras acima de ${formatarPreco(CONFIG.entregaGratisAcimaDe)}` : "") + ".";
   }
   const tr = document.getElementById("texto-retirada");
-  if (tr) tr.textContent = "Retirada grátis — geramos um código para você apresentar na loja. " + CONFIG.notaSinal;
+  if (tr) tr.textContent = "Retirada grátis — geramos um código para apresentares na loja. " + CONFIG.notaSinal;
 }
 
 function preencherPaginaLoja() {
