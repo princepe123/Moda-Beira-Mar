@@ -104,7 +104,19 @@ function renderizarCabecalho() {
     <header class="topo">
       <div class="container topo-inner">
         <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}<span class="logo-texto"><span class="logo-nome">${CONFIG.logoNome || CONFIG.nomeLoja}</span><span class="logo-slogan">${CONFIG.slogan}</span></span></a>
-        <nav class="nav">
+      </div>
+    </header>`;
+  const w = document.getElementById("botao-whatsapp");
+  if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
+}
+
+function renderizarRodape() {
+  const el = document.getElementById("rodape");
+  if (!el) return;
+  el.innerHTML = `
+    <footer class="rodape">
+      <div class="container">
+        <nav class="nav nav-rodape">
           <div class="menu-opcoes" id="menu-opcoes">
             <button type="button" class="opcoes-btn" id="btn-opcoes">Opções ▾</button>
             <div class="opcoes-lista" id="lista-opcoes">
@@ -120,27 +132,6 @@ function renderizarCabecalho() {
           <a href="nossa-loja.html">Nossa Loja</a>
           <a href="carrinho.html" class="link-carrinho">Carrinho <span class="badge-carrinho">0</span></a>
         </nav>
-      </div>
-    </header>`;
-  const w = document.getElementById("botao-whatsapp");
-  if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
-  const menu = document.getElementById("menu-opcoes");
-  const btn = document.getElementById("btn-opcoes");
-  if (menu && btn) {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      menu.classList.toggle("aberto");
-    });
-    document.addEventListener("click", () => menu.classList.remove("aberto"));
-  }
-}
-
-function renderizarRodape() {
-  const el = document.getElementById("rodape");
-  if (!el) return;
-  el.innerHTML = `
-    <footer class="rodape">
-      <div class="container">
         <div class="rodape-grid">
           <div>
             <h3>${CONFIG.nomeLoja}</h3>
@@ -160,6 +151,15 @@ function renderizarRodape() {
     </footer>`;
   const w = document.getElementById("rodape-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
+  const menu = document.getElementById("menu-opcoes");
+  const btn = document.getElementById("btn-opcoes");
+  if (menu && btn) {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      menu.classList.toggle("aberto");
+    });
+    document.addEventListener("click", () => menu.classList.remove("aberto"));
+  }
 }
 
 function midiaProduto(p, classeImg) {
