@@ -15,6 +15,7 @@ const CONFIG = {
   corPrimaria: "#1f2937",
   corDestaque: "#e11d48",
   corWhatsApp: "#25d366",
+  imagemFundo: "fotos/fundo-site.png",
   taxaEntrega: 15.0,
   entregaGratisAcimaDe: 200.0,
   formasPagamento: "PayPal, MB WAY ou transferência bancária",

@@ -62,9 +62,9 @@ Basta copiar um bloco existente, mudar os valores e salvar. Para usar **fotos re
 
 O menu **Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`.
 
-### 3. Cores — também em `js/config.js`
+### 3. Cores e fundo — também em `js/config.js`
 
-`corPrimaria`, `corDestaque` e `corWhatsApp` (formato `#rrggbb`).
+`corPrimaria`, `corDestaque` e `corWhatsApp` (formato `#rrggbb`) e `imagemFundo` (caminho da imagem de fundo do site, ex.: `"fotos/fundo-site.png"`; se ficar vazio `""`, usa só a cor de fundo). Para mudar o fundo, basta substituir o ficheiro indicado em `imagemFundo`.
 
 ## Como publicar de graça
 

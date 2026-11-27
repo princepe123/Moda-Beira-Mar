@@ -83,6 +83,7 @@ function aplicarCores() {
   r.setProperty("--primaria", CONFIG.corPrimaria);
   r.setProperty("--destaque", CONFIG.corDestaque);
   r.setProperty("--whatsapp", CONFIG.corWhatsApp);
+  if (CONFIG.imagemFundo) document.body.style.backgroundImage = `url("${CONFIG.imagemFundo}")`;
   document.title = CONFIG.nomeLoja + " — Roupas e acessórios";
 }
 

@@ -15,9 +15,22 @@
 
 body {
   font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-  background: var(--fundo);
+  background-color: var(--fundo);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   color: var(--texto);
   line-height: 1.5;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(248, 250, 252, .82);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
