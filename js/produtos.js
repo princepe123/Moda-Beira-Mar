@@ -260,5 +260,49 @@ const produtos = [
     foto: "fotos/pulseira-espiral-praia.png",
     cor: ["#fef3c7", "#f59e0b"],
     descricao: "Pulseira espiral dourada com detalhes em forma de concha — estilo praia."
+  },
+  {
+    id: 28,
+    nome: "Cadeira de Praia Portátil",
+    categoria: "Praia",
+    preco: 39.9,
+    precoAntigo: null,
+    novo: true,
+    foto: "fotos/cadeira-praia-rosa.jpg",
+    cor: ["#fbcfe8", "#f9a8d4"],
+    descricao: "Cadeira de praia dobrável, cor rosa, leve e fácil de transportar. Ideal para um lugar na areia."
+  },
+  {
+    id: 29,
+    nome: "Guarda-sol Azul (com capa)",
+    categoria: "Praia",
+    preco: 34.9,
+    precoAntigo: null,
+    novo: true,
+    foto: "fotos/guarda-sol-azul.jpg",
+    cor: ["#bfdbfe", "#3b82f6"],
+    descricao: "Guarda-sol azul escuro com detalhes brancos, inclui capa de transporte. Proteção UV."
+  },
+  {
+    id: 30,
+    nome: "Guarda-sol Azul 2,40 m",
+    categoria: "Praia",
+    preco: 49.9,
+    precoAntigo: null,
+    novo: true,
+    foto: "fotos/guarda-sol-azul-2m40.jpg",
+    cor: ["#dbeafe", "#60a5fa"],
+    descricao: "Guarda-sol azul com 2,40 m de diâmetro, plantado na areia. Sombra para 2 pessoas. Proteção UV."
+  },
+  {
+    id: 31,
+    nome: "Biquíni de Croché Verde",
+    categoria: "Praia",
+    preco: 29.9,
+    precoAntigo: 39.9,
+    novo: true,
+    foto: "fotos/biquini-croche-verde.jpg",
+    cor: ["#d1fae5", "#059669"],
+    descricao: "Biquíni de croché verde escuro com detalhes brancos, alças finas ajustáveis e top triangular. Tamanhos P a G."
   }
 ];
