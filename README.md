@@ -4,6 +4,8 @@ Site de vendas completo e 100% estático (HTML + CSS + JavaScript puro): não pr
 
 ## O que o site faz
 
+- **Novidades** é um carrossel automático: mostra no máximo 4 produtos de cada vez e vai avançando um a um a cada 3 segundos (para ao passar o rato por cima; no telemóvel mostra 2–3 por linha conforme a largura)
+
 - **Vitrine de produtos** com busca e filtro por categoria (`index.html`)
 - **Página de produto** com quantidade e pedido direto pelo WhatsApp (`produto.html?id=1`)
 - **Carrinho de compras** salvo no navegador do cliente (`carrinho.html`)
@@ -51,8 +53,8 @@ Cada produto é um objeto dentro do array `produtos`:
   preco: 89.9,
   precoAntigo: 119.9,        // opcional — mostra o desconto em %
   cor: ["#fce7f3", "#f9a8d4"], // gradiente do cartão (a "foto" é o nome do produto sobre esta cor)
-  novo: true,          // opcional — entra na secção "Novidades" da página inicial (tag NOVO)
-  bestseller: true,    // opcional — entra na secção "Mais vendidos" (tag MAIS VENDIDO)
+  novo: true,          // opcional — entra no carrossel automático "Novidades" (tag NOVO)
+  bestseller: true,    // opcional — entra na secção "Mais vistos" (tag MAIS VISTO)
   destaque: true,      // opcional — entra na secção "Escolhidos em cada setor" (convém 1 por categoria)
   descricao: "Tecido leve plissado..."
 }

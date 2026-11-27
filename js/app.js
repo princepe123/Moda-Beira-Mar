@@ -175,7 +175,7 @@ function cardProduto(p) {
         ${midiaProduto(p, "card-foto")}
         ${desconto ? `<span class="tag-desconto">-${desconto}%</span>` : ""}
         ${p.novo ? `<span class="tag-novo">NOVO</span>` : ""}
-        ${p.bestseller ? `<span class="tag-mais-vendido">MAIS VENDIDO</span>` : ""}
+        ${p.bestseller ? `<span class="tag-mais-vendido">MAIS VISTO</span>` : ""}
       </a>
       <div class="card-corpo">
         <span class="card-cat">${p.categoria}</span>
@@ -223,10 +223,50 @@ function renderizarSecaoHome(idLista, lista) {
   div.innerHTML = lista.map(cardProduto).join("");
 }
 
+let carrosselTimer = null;
+
+function iniciarCarrosselNovidades() {
+  const faixa = document.getElementById("lista-novidades");
+  if (!faixa) return;
+  const total = faixa.children.length;
+  if (total <= 4) return;
+  const carrossel = document.getElementById("carrossel-novidades");
+  let indice = 0;
+  const visiveis = () => {
+    const card = faixa.querySelector(".card");
+    if (!card || !carrossel) return 1;
+    const passo = card.getBoundingClientRect().width + 20;
+    return Math.max(1, Math.floor((carrossel.clientWidth + 20) / passo));
+  };
+  const ir = () => {
+    const max = Math.max(0, total - visiveis());
+    indice = indice >= max ? 0 : indice + 1;
+    const card = faixa.querySelector(".card");
+    const passo = card ? card.getBoundingClientRect().width + 20 : 0;
+    faixa.style.transform = `translateX(-${indice * passo}px)`;
+  };
+  const parar = () => clearInterval(carrosselTimer);
+  const comecar = () => {
+    parar();
+    carrosselTimer = setInterval(ir, 3000);
+    if (carrosselTimer.unref) carrosselTimer.unref();
+  };
+  comecar();
+  if (carrossel) {
+    carrossel.addEventListener("mouseenter", parar);
+    carrossel.addEventListener("mouseleave", comecar);
+  }
+  window.addEventListener("resize", () => {
+    indice = 0;
+    faixa.style.transform = "translateX(0)";
+  });
+}
+
 function iniciarHome() {
   renderizarSecaoHome("lista-novidades", produtos.filter(p => p.novo));
   renderizarSecaoHome("lista-mais-vendidos", produtos.filter(p => p.bestseller));
   renderizarSecaoHome("lista-destaques", produtos.filter(p => p.destaque));
+  iniciarCarrosselNovidades();
 }
 
 function iniciarCatalogo() {
