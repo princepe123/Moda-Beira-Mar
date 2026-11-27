@@ -1,7 +1,8 @@
 const CONFIG = {
   nomeLoja: "Moda à Beira-Mar",
-  slogan: "Roupas e acessórios à beira-mar — compra online ou retira na loja física",
+  slogan: "Roupas e acessórios à beira-mar — compra online e recebe em casa ou retira na loja física",
   whatsapp: "351000000000",
+  paypal: "",
   endereco: "Terminal",
   cep: "00000-000",
   plusCode: "JWW3+XP Seixal",
@@ -14,7 +15,8 @@ const CONFIG = {
   corWhatsApp: "#25d366",
   taxaEntrega: 15.0,
   entregaGratisAcimaDe: 200.0,
-  formasPagamento: "MB WAY, transferência bancária ou dinheiro na loja",
-  notaSinal: "Pagamento em dinheiro na loja exige um sinal de pelo menos 1/3 do valor da encomenda, para garantir a retirada. O restante é pago no levantamento.",
-  sinalMinimo: 1 / 3
+  formasPagamento: "PayPal, MB WAY ou transferência bancária",
+  notaSinal: "Para levantar na loja física é obrigatório pagar um sinal de 10% do valor total da encomenda, para garantir a reserva. Tens 3 dias úteis para levantar; passado esse prazo, o pedido é cancelado.",
+  sinalMinimo: 0.1,
+  prazoRetiradaDiasUteis: 3
 };

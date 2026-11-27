@@ -325,7 +325,7 @@ function atualizarResumo() {
   document.getElementById("resumo-total").textContent = formatarPreco(sub + ent);
 }
 
-function montarMensagemPedido(forma, nome, telefone, obs) {
+function montarMensagemPedido(forma, nome, telefone, morada, obs) {
   const carrinho = getCarrinho();
   const linhas = carrinho.map(i => {
     const p = produtoPorId(i.id);
@@ -333,17 +333,20 @@ function montarMensagemPedido(forma, nome, telefone, obs) {
   });
   const sub = subtotalCarrinho();
   const ent = valorEntrega();
-  let msg = `Olá! Quero fazer um pedido na *${CONFIG.nomeLoja}*\n\n${linhas.join("\n")}\n\nSubtotal: ${formatarPreco(sub)}\n`;
+  const pctSinal = Math.round(CONFIG.sinalMinimo * 100);
+  let msg = `Olá! Quero fazer uma encomenda na *${CONFIG.nomeLoja}*\n\n${linhas.join("\n")}\n\nSubtotal: ${formatarPreco(sub)}\n`;
   if (forma === "retirada") {
     const sinal = Math.ceil((sub + ent) * CONFIG.sinalMinimo * 100) / 100;
-    msg += `Forma: retirada na loja física (grátis)\nSinal mínimo em dinheiro na loja (1/3 do total): ${formatarPreco(sinal)}\n`;
+    msg += `Forma: levantamento na loja física (portes grátis)\nSinal obrigatório (${pctSinal}% do total): ${formatarPreco(sinal)} — prazo de ${CONFIG.prazoRetiradaDiasUteis} dias úteis para levantar\n`;
   } else {
-    msg += `Entrega: ${ent === 0 ? "grátis" : formatarPreco(ent)}\nEndereço de entrega: (indicar na conversa)\n`;
+    msg += `Forma: entrega em morada (${ent === 0 ? "portes grátis" : "portes " + formatarPreco(ent)})\n`;
+    if (morada) msg += `Morada de entrega: ${morada}\n`;
   }
-  msg += `*Total: ${formatarPreco(sub + ent)}*`;
-  if (nome) msg += `\nNome: ${nome}`;
-  if (telefone) msg += `\nTelemóvel: ${telefone}`;
-  if (obs) msg += `\nObservações: ${obs}`;
+  msg += `*Total: ${formatarPreco(sub + ent)}*\n`;
+  msg += `Pagamento: ${CONFIG.formasPagamento}` + (CONFIG.paypal ? ` — PayPal: ${CONFIG.paypal}` : "") + "\n";
+  if (nome) msg += `Nome: ${nome}\n`;
+  if (telefone) msg += `Telemóvel: ${telefone}\n`;
+  if (obs) msg += `Observações: ${obs}`;
   return msg;
 }
 
@@ -354,7 +357,9 @@ function finalizarPedido() {
   const nome = document.getElementById("nome").value.trim();
   const telefone = document.getElementById("telefone").value.trim();
   const obs = document.getElementById("obs").value.trim();
-  const msg = montarMensagemPedido(forma, nome, telefone, obs);
+  const campoMorada = document.getElementById("morada");
+  const morada = campoMorada ? campoMorada.value.trim() : "";
+  const msg = montarMensagemPedido(forma, nome, telefone, morada, obs);
   const url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
   const resultado = document.getElementById("resultado-pedido");
   if (forma === "retirada") {
@@ -367,8 +372,9 @@ function finalizarPedido() {
         <p>O seu código de retirada é:</p>
         <span class="codigo">${codigo}</span>
         <p>Apresente este código na nossa loja física:<br><strong>${CONFIG.endereco}, ${CONFIG.cidade}</strong></p>
-        <p>Pagamento na retirada: <strong>${CONFIG.formasPagamento}</strong>.</p>
-        <p>${CONFIG.notaSinal}<br>Sinal mínimo neste pedido: <strong>${formatarPreco(sinal)}</strong>.</p>
+        <p>Pagamento: <strong>${CONFIG.formasPagamento}</strong>${CONFIG.paypal ? ` — PayPal: <a href="${CONFIG.paypal}" target="_blank" rel="noopener">${CONFIG.paypal}</a>` : ""}.</p>
+        <p>${CONFIG.notaSinal}</p>
+        <p>Sinal obrigatório neste pedido (${Math.round(CONFIG.sinalMinimo * 100)}%): <strong>${formatarPreco(sinal)}</strong> · Prazo para levantar: <strong>${CONFIG.prazoRetiradaDiasUteis} dias úteis</strong>.</p>
         <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">Confirmar também pelo WhatsApp</a>
       </div>`;
   } else {
@@ -386,9 +392,19 @@ function finalizarPedido() {
 
 function iniciarCarrinho() {
   renderizarCarrinho();
+  const campoMorada = document.getElementById("campo-morada");
+  const atualizarVisibilidadeMorada = () => {
+    if (campoMorada) campoMorada.style.display = entregaSelecionada() === "entrega" ? "block" : "none";
+  };
   document.querySelectorAll('input[name="forma"]').forEach(r =>
-    r.addEventListener("change", atualizarResumo)
+    r.addEventListener("change", () => { atualizarResumo(); atualizarVisibilidadeMorada(); })
   );
+  atualizarVisibilidadeMorada();
+  const lp = document.getElementById("linha-paypal");
+  if (lp && CONFIG.paypal) {
+    lp.style.display = "block";
+    lp.innerHTML = `Pagamento com PayPal: <a href="${CONFIG.paypal}" target="_blank" rel="noopener">${CONFIG.paypal}</a>`;
+  }
   document.getElementById("btn-finalizar").addEventListener("click", finalizarPedido);
   const te = document.getElementById("texto-entrega");
   if (te) {

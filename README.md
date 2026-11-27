@@ -24,10 +24,14 @@ endereco: "Terminal",
 cep: "2840-000",
 plusCode: "JWW3+XP Seixal", // Plus Code do Google Maps — usado no link "Abrir no Google Maps"
 cidade: "Seixal, Setúbal",
-formasPagamento: "MB WAY, transferência bancária ou dinheiro na loja",
-notaSinal: "Pagamento em dinheiro na loja exige um sinal de pelo menos 1/3 do valor do pedido, para garantir a retirada.",
-sinalMinimo: 1 / 3,          // fração mínima do total como sinal na retirada em dinheiro
+paypal: "",                 // link PayPal.Me ou e-mail PayPal — se vazio, não aparece no site
+formasPagamento: "PayPal, MB WAY ou transferência bancária",
+notaSinal: "Para levantar na loja é obrigatório um sinal de 10% do valor total; prazo de 3 dias úteis.",
+sinalMinimo: 0.1,           // 10% de sinal obrigatório no levantamento na loja física
+prazoRetiradaDiasUteis: 3   // dias úteis que o cliente tem para levantar a encomenda na loja
 ```
+
+No checkout (`carrinho.html`) o cliente escolhe **entrega em morada** (aparece um campo "Morada de entrega") ou **levantamento na loja física** (mostra o código de retirada, o valor do sinal de 10% e o prazo de 3 dias úteis). O pedido final é enviado pelo WhatsApp com todos estes dados.
 
 ### 2. Produtos — `js/produtos.js`
 
