@@ -85,7 +85,7 @@ function aplicarLogo() {
     else img.style.display = "none";
   }
   const nome = document.getElementById("hero-logo-nome");
-  if (nome) nome.textContent = CONFIG.logoNome || "";
+  if (nome) nome.textContent = CONFIG.logo ? "" : (CONFIG.logoNome || "");
 }
 
 function aplicarCores() {
