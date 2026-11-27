@@ -151,12 +151,17 @@ function renderizarRodape() {
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
 }
 
+function midiaProduto(p, classeImg) {
+  if (p.foto) return `<img class="${classeImg}" src="${p.foto}" alt="${p.nome}" loading="lazy">`;
+  return `<span class="card-titulo-img">${p.nome}</span>`;
+}
+
 function cardProduto(p) {
   const desconto = p.precoAntigo ? Math.round((1 - p.preco / p.precoAntigo) * 100) : 0;
   return `
     <article class="card">
       <a class="card-img" href="produto.html?id=${p.id}" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
-        <span class="card-titulo-img">${p.nome}</span>
+        ${midiaProduto(p, "card-foto")}
         ${desconto ? `<span class="tag-desconto">-${desconto}%</span>` : ""}
         ${p.novo ? `<span class="tag-novo">NOVO</span>` : ""}
         ${p.bestseller ? `<span class="tag-mais-vendido">MAIS VENDIDO</span>` : ""}
@@ -256,7 +261,7 @@ function iniciarDetalhe() {
   div.innerHTML = `
     <div class="detalhe">
       <div class="detalhe-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
-        ${p.nome}
+        ${midiaProduto(p, "detalhe-foto")}
         ${desconto ? `<span class="tag-desconto">-${desconto}%</span>` : ""}
       </div>
       <div class="detalhe-info">
@@ -302,7 +307,7 @@ function renderizarCarrinho() {
     if (!p) return "";
     return `
       <div class="item-carrinho">
-        <div class="item-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">${p.nome}</div>
+        <div class="item-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">${midiaProduto(p, "item-foto")}</div>
         <div class="item-info">
           <a href="produto.html?id=${p.id}"><strong>${p.nome}</strong></a>
           <span class="item-cat">${p.categoria}</span>

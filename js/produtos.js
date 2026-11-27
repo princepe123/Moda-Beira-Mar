@@ -200,5 +200,65 @@ const produtos = [
     novo: true,
     cor: ["#e0f2fe", "#7dd3fc"],
     descricao: "Chinelos de borracha antiderrapantes, resistentes à água e à areia. Tamanhos 36 a 44."
+  },
+  {
+    id: 22,
+    nome: "Colar Dourado com Pingente",
+    categoria: "Acessórios",
+    preco: 24.9,
+    precoAntigo: null,
+    foto: "fotos/colar-dourado-pingente.jpg",
+    cor: ["#fef3c7", "#fbbf24"],
+    descricao: "Colar dourado de corrente fina com pequenas pedras e pingente central. Comprimento ajustável."
+  },
+  {
+    id: 23,
+    nome: "Tornozeleiras Douradas (conjunto)",
+    categoria: "Acessórios",
+    preco: 12.9,
+    precoAntigo: null,
+    foto: "fotos/tornozeleiras-douradas.jpg",
+    cor: ["#fef9c3", "#fde047"],
+    descricao: "Conjunto de tornozeleiras douradas com pingentes variados (estrela, coração, borboleta, infinito)."
+  },
+  {
+    id: 24,
+    nome: "Pulseiras Douradas",
+    categoria: "Acessórios",
+    preco: 14.9,
+    precoAntigo: null,
+    foto: "fotos/pulseiras-douradas.jpg",
+    cor: ["#fef3c7", "#fcd34d"],
+    descricao: "Conjunto de pulseiras douradas e creme com acabamento liso e brilhante."
+  },
+  {
+    id: 25,
+    nome: "Pulseiras Largas Prateadas",
+    categoria: "Acessórios",
+    preco: 16.9,
+    precoAntigo: null,
+    foto: "fotos/pulseiras-prateadas.jpg",
+    cor: ["#e5e7eb", "#9ca3af"],
+    descricao: "Pulseiras largas prateadas com acabamento metalizado reflexivo."
+  },
+  {
+    id: 26,
+    nome: "Conjunto de Bijuteria Variada",
+    categoria: "Acessórios",
+    preco: 29.9,
+    precoAntigo: 39.9,
+    foto: "fotos/conjunto-bijuteria.jpg",
+    cor: ["#f3f4f6", "#d1d5db"],
+    descricao: "Conjunto variado: brincos, colares, pulseiras e anéis em tons prateado e dourado."
+  },
+  {
+    id: 27,
+    nome: "Pulseira Espiral Dourada",
+    categoria: "Acessórios",
+    preco: 18.9,
+    precoAntigo: null,
+    foto: "fotos/pulseira-espiral-praia.png",
+    cor: ["#fef3c7", "#f59e0b"],
+    descricao: "Pulseira espiral dourada com detalhes em forma de concha — estilo praia."
   }
 ];

@@ -52,7 +52,7 @@ Cada produto é um objeto dentro do array `produtos`:
 }
 ```
 
-Basta copiar um bloco existente, mudar os valores e salvar. Para usar fotos reais dos produtos, adicione um campo `foto: "caminho/da/imagem.jpg"` e troque o `${p.nome}` do cartão/página de produto por `<img src="${p.foto}">` em `js/app.js`.
+Basta copiar um bloco existente, mudar os valores e salvar. Para usar **fotos reais**, coloca a imagem na pasta `fotos/` e adiciona o campo `foto: "fotos/nome-da-imagem.jpg"` ao produto — o cartão, a página do produto e o carrinho passam a mostrar a foto automaticamente (sem foto, mostra o nome do produto sobre a cor).
 
 O menu **Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`.
 
