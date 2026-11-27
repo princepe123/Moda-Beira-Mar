@@ -45,6 +45,9 @@ Cada produto é um objeto dentro do array `produtos`:
   preco: 89.9,
   precoAntigo: 119.9,        // opcional — mostra o desconto em %
   cor: ["#fce7f3", "#f9a8d4"], // gradiente do cartão (a "foto" é o nome do produto sobre esta cor)
+  novo: true,          // opcional — entra na secção "Novidades" da página inicial (tag NOVO)
+  bestseller: true,    // opcional — entra na secção "Mais vendidos" (tag MAIS VENDIDO)
+  destaque: true,      // opcional — entra na secção "Escolhidos em cada setor" (convém 1 por categoria)
   descricao: "Tecido leve plissado..."
 }
 ```

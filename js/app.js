@@ -158,6 +158,8 @@ function cardProduto(p) {
       <a class="card-img" href="produto.html?id=${p.id}" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
         <span class="card-titulo-img">${p.nome}</span>
         ${desconto ? `<span class="tag-desconto">-${desconto}%</span>` : ""}
+        ${p.novo ? `<span class="tag-novo">NOVO</span>` : ""}
+        ${p.bestseller ? `<span class="tag-mais-vendido">MAIS VENDIDO</span>` : ""}
       </a>
       <div class="card-corpo">
         <span class="card-cat">${p.categoria}</span>
@@ -192,6 +194,23 @@ function renderizarCatalogo() {
   div.innerHTML = lista.length
     ? lista.map(cardProduto).join("")
     : `<p class="vazio">Nenhum produto encontrado. Tente outra pesquisa.</p>`;
+}
+
+function renderizarSecaoHome(idLista, lista) {
+  const div = document.getElementById(idLista);
+  if (!div) return;
+  const secao = div.closest("section");
+  if (!lista.length) {
+    if (secao) secao.style.display = "none";
+    return;
+  }
+  div.innerHTML = lista.map(cardProduto).join("");
+}
+
+function iniciarHome() {
+  renderizarSecaoHome("lista-novidades", produtos.filter(p => p.novo));
+  renderizarSecaoHome("lista-mais-vendidos", produtos.filter(p => p.bestseller));
+  renderizarSecaoHome("lista-destaques", produtos.filter(p => p.destaque));
 }
 
 function iniciarCatalogo() {
@@ -459,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   atualizarBadge();
   const tph = document.getElementById("texto-pagamento-home");
   if (tph) tph.textContent = CONFIG.formasPagamento + " — na entrega ou na retirada.";
-  if (document.getElementById("lista-produtos")) iniciarCatalogo();
+  if (document.getElementById("lista-produtos")) { iniciarCatalogo(); iniciarHome(); }
   if (document.getElementById("detalhe-produto")) iniciarDetalhe();
   if (document.getElementById("lista-carrinho")) iniciarCarrinho();
   if (document.getElementById("info-endereco")) preencherPaginaLoja();

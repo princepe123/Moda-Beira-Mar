@@ -5,6 +5,7 @@ const produtos = [
     categoria: "Homem",
     preco: 49.9,
     precoAntigo: 69.9,
+    bestseller: true,
     cor: ["#dbeafe", "#93c5fd"],
     descricao: "Camiseta 100% algodão, toque macio e caimento reto. Disponível em várias cores. Tamanhos P ao GG."
   },
@@ -23,6 +24,7 @@ const produtos = [
     categoria: "Mulher",
     preco: 129.9,
     precoAntigo: null,
+    destaque: true,
     cor: ["#fce7f3", "#f9a8d4"],
     descricao: "Vestido midi com estampa floral, tecido leve e fluido. Ideal para o dia a dia e ocasiões especiais."
   },
@@ -41,6 +43,8 @@ const produtos = [
     categoria: "Homem",
     preco: 119.9,
     precoAntigo: null,
+    destaque: true,
+    bestseller: true,
     cor: ["#c7d2fe", "#818cf8"],
     descricao: "Jeans slim com elastano, cintura média e lavagem azul tradicional. Numeração 36 a 46."
   },
@@ -77,6 +81,7 @@ const produtos = [
     categoria: "Acessórios",
     preco: 189.9,
     precoAntigo: 229.9,
+    destaque: true,
     cor: ["#e7e5e4", "#a8a29e"],
     descricao: "Bolsa média em couro sintético de alta qualidade, alça ajustável e zíper interno. Cor castanha."
   },
@@ -113,6 +118,7 @@ const produtos = [
     categoria: "Crianças",
     preco: 19.9,
     precoAntigo: 24.9,
+    novo: true,
     cor: ["#fef9c3", "#fde047"],
     descricao: "T-shirt 100% algodão para crianças, com estampas divertidas. Idades 2 a 10 anos."
   },
@@ -131,6 +137,7 @@ const produtos = [
     categoria: "Crianças",
     preco: 34.9,
     precoAntigo: null,
+    novo: true,
     cor: ["#fbcfe8", "#f472b6"],
     descricao: "Vestido leve para meninas, com laço nas costas. Idades 3 a 10 anos."
   },
@@ -149,6 +156,7 @@ const produtos = [
     categoria: "Crianças",
     preco: 29.9,
     precoAntigo: 39.9,
+    destaque: true,
     cor: ["#ede9fe", "#a78bfa"],
     descricao: "Mochila escolar resistente com 2 compartimentos e alças acolchoadas. Várias cores."
   },
@@ -158,6 +166,8 @@ const produtos = [
     categoria: "Praia",
     preco: 29.9,
     precoAntigo: null,
+    novo: true,
+    destaque: true,
     cor: ["#fce7f3", "#f9a8d4"],
     descricao: "Biquíni em licra de secagem rápida, com forro. Tamanhos P a GG."
   },
@@ -167,6 +177,7 @@ const produtos = [
     categoria: "Praia",
     preco: 24.9,
     precoAntigo: null,
+    novo: true,
     cor: ["#cffafe", "#67e8f9"],
     descricao: "Sunga masculina de secagem rápida, com cordão ajustável. Tamanhos P a GG."
   },
@@ -176,6 +187,7 @@ const produtos = [
     categoria: "Praia",
     preco: 19.9,
     precoAntigo: 24.9,
+    novo: true,
     cor: ["#fef3c7", "#fbbf24"],
     descricao: "Chapéu de palha com aba larga e proteção UV, ideal para a praia."
   },
@@ -185,6 +197,7 @@ const produtos = [
     categoria: "Praia",
     preco: 14.9,
     precoAntigo: null,
+    novo: true,
     cor: ["#e0f2fe", "#7dd3fc"],
     descricao: "Chinelos de borracha antiderrapantes, resistentes à água e à areia. Tamanhos 36 a 44."
   }
