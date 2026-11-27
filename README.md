@@ -40,15 +40,14 @@ Cada produto é um objeto dentro do array `produtos`:
   categoria: "Saias",        // nova categoria aparece sozinha nos filtros
   preco: 89.9,
   precoAntigo: 119.9,        // opcional — mostra o desconto em %
-  emoji: "👗",               // "foto" do produto
-  cor: ["#fce7f3", "#f9a8d4"], // gradiente do cartão
+  cor: ["#fce7f3", "#f9a8d4"], // gradiente do cartão (a "foto" é o nome do produto sobre esta cor)
   descricao: "Tecido leve plissado..."
 }
 ```
 
-Basta copiar um bloco existente, mudar os valores e salvar. Para usar fotos reais no lugar dos emojis, troque o `emoji` por uma tag `<img src="...">` no campo e ajuste o CSS se necessário.
+Basta copiar um bloco existente, mudar os valores e salvar. Para usar fotos reais dos produtos, adicione um campo `foto: "caminho/da/imagem.jpg"` e troque o `${p.nome}` do cartão/página de produto por `<img src="${p.foto}">` em `js/app.js`.
 
-O menu **☰ Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`.
+O menu **Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`.
 
 ### 3. Cores — também em `js/config.js`
 

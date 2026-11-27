@@ -26,7 +26,6 @@ a { color: inherit; }
 .topo { position: sticky; top: 0; background: var(--branco); border-bottom: 1px solid var(--borda); z-index: 50; }
 .topo-inner { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 10px; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
 .logo { font-weight: 800; font-size: 1.25rem; text-decoration: none; color: var(--primaria); display: flex; align-items: center; gap: 8px; }
-.logo-emoji { font-size: 1.4rem; }
 .nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
 .nav a { text-decoration: none; color: var(--texto); font-weight: 500; font-size: .95rem; }
 .nav a:hover { color: var(--destaque); }
@@ -55,7 +54,6 @@ a { color: inherit; }
 
 .beneficios { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; padding-top: 40px; padding-bottom: 10px; }
 .beneficio { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio); padding: 22px; text-align: center; box-shadow: var(--sombra); }
-.beneficio .emoji { font-size: 2rem; }
 .beneficio h3 { margin: 10px 0 6px; font-size: 1.05rem; }
 .beneficio p { color: var(--cinza); font-size: .9rem; }
 
@@ -72,7 +70,7 @@ a { color: inherit; }
 .card { background: var(--branco); border: 1px solid var(--borda); border-radius: var(--raio); overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column; transition: transform .15s; }
 .card:hover { transform: translateY(-4px); }
 .card-img { position: relative; height: 180px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
-.card-emoji { font-size: 4.5rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,.2)); }
+.card-titulo-img { color: #fff; font-weight: 800; font-size: 1.05rem; text-align: center; padding: 0 16px; text-shadow: 0 2px 6px rgba(0,0,0,.35); }
 .tag-desconto { position: absolute; top: 10px; left: 10px; background: var(--destaque); color: #fff; font-size: .78rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
 .card-corpo { padding: 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .card-cat { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; color: var(--cinza); font-weight: 600; }
@@ -86,7 +84,7 @@ a { color: inherit; }
 .vazio { grid-column: 1 / -1; text-align: center; color: var(--cinza); padding: 40px 0; }
 
 .detalhe { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; padding: 50px 20px; max-width: 1000px; margin: 0 auto; }
-.detalhe-img { position: relative; border-radius: var(--raio); display: flex; align-items: center; justify-content: center; font-size: 9rem; min-height: 380px; box-shadow: var(--sombra); }
+.detalhe-img { position: relative; border-radius: var(--raio); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 800; color: #fff; text-align: center; padding: 24px; min-height: 380px; box-shadow: var(--sombra); text-shadow: 0 2px 8px rgba(0,0,0,.3); }
 .detalhe-info h1 { font-size: 1.9rem; margin: 8px 0; }
 .detalhe-preco { font-size: 1.6rem; margin: 14px 0; }
 .detalhe-preco s { color: var(--cinza); font-size: 1.1rem; margin-right: 10px; }
@@ -102,7 +100,7 @@ a { color: inherit; }
 .pagina h1 { font-size: 1.9rem; margin-bottom: 24px; }
 
 .item-carrinho { display: flex; align-items: center; gap: 16px; background: #fff; border: 1px solid var(--borda); border-radius: var(--raio); padding: 14px; margin-bottom: 12px; box-shadow: var(--sombra); flex-wrap: wrap; }
-.item-img { width: 70px; height: 70px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; flex-shrink: 0; }
+.item-img { width: 70px; height: 70px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: .68rem; font-weight: 700; color: #fff; text-align: center; padding: 4px; flex-shrink: 0; text-shadow: 0 1px 3px rgba(0,0,0,.3); }
 .item-info { flex: 1; min-width: 150px; display: flex; flex-direction: column; }
 .item-info a { text-decoration: none; }
 .item-info a:hover { color: var(--destaque); }
@@ -113,7 +111,7 @@ a { color: inherit; }
 .item-qtd button:hover { background: var(--primaria); color: #fff; }
 .item-qtd span { font-weight: 700; min-width: 20px; text-align: center; }
 .item-total { font-weight: 700; min-width: 90px; text-align: right; }
-.item-remover { border: none; background: none; cursor: pointer; font-size: 1.2rem; }
+.item-remover { border: none; background: none; cursor: pointer; font-size: .78rem; font-weight: 600; color: var(--cinza); text-decoration: underline; }
 .carrinho-vazio { text-align: center; padding: 60px 0; color: var(--cinza); }
 .carrinho-vazio .btn { margin-top: 16px; }
 
@@ -146,11 +144,9 @@ a { color: inherit; }
 .cartao { background: #fff; border: 1px solid var(--borda); border-radius: var(--raio); padding: 24px; box-shadow: var(--sombra); }
 .cartao h2 { font-size: 1.25rem; margin-bottom: 14px; }
 .linha-info { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
-.linha-info .emoji { font-size: 1.3rem; line-height: 1.4; }
 .linha-info small { display: block; color: var(--cinza); font-weight: 700; text-transform: uppercase; font-size: .68rem; letter-spacing: .06em; }
 .horario-linha { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed var(--borda); font-size: .95rem; }
 .mapa { margin-top: 18px; background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-radius: var(--raio); min-height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; }
-.mapa .emoji { font-size: 2.5rem; }
 .mapa p { font-weight: 600; }
 
 .rodape { background: var(--primaria); color: #d1d5db; padding: 36px 0 20px; margin-top: 40px; }
@@ -172,7 +168,7 @@ a { color: inherit; }
   .hero h1 { font-size: 1.9rem; }
   .beneficios { grid-template-columns: 1fr; }
   .detalhe { grid-template-columns: 1fr; padding-top: 30px; }
-  .detalhe-img { min-height: 260px; font-size: 6rem; }
+  .detalhe-img { min-height: 260px; font-size: 1.4rem; }
   .loja-grid { grid-template-columns: 1fr; }
   .rodape-grid { grid-template-columns: 1fr; }
   .nav { gap: 12px; }

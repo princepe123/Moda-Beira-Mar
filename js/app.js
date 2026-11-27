@@ -30,7 +30,7 @@ function adicionarAoCarrinho(id, qtd) {
     carrinho.push({ id: id, qtd: qtd });
   }
   salvarCarrinho(carrinho);
-  abrirToast("Adicionado ao carrinho ✓");
+  abrirToast("Adicionado ao carrinho");
 }
 
 function removerDoCarrinho(id) {
@@ -92,22 +92,22 @@ function renderizarCabecalho() {
   el.innerHTML = `
     <header class="topo">
       <div class="container topo-inner">
-        <a class="logo" href="index.html"><span class="logo-emoji">🛍️</span> ${CONFIG.nomeLoja}</a>
+        <a class="logo" href="index.html">${CONFIG.nomeLoja}</a>
         <nav class="nav">
           <div class="menu-opcoes" id="menu-opcoes">
             <button type="button" class="opcoes-btn" id="btn-opcoes">☰ Opções ▾</button>
             <div class="opcoes-lista" id="lista-opcoes">
-              <a href="index.html?cat=Crianças#catalogo">👶 Crianças</a>
-              <a href="index.html?cat=Mulher#catalogo">👩 Mulher</a>
-              <a href="index.html?cat=Homem#catalogo">👨 Homem</a>
-              <a href="index.html?cat=Praia#catalogo">🏖️ Praia</a>
-              <a href="index.html?cat=Acessórios#catalogo">👜 Acessórios</a>
+              <a href="index.html?cat=Crianças#catalogo">Crianças</a>
+              <a href="index.html?cat=Mulher#catalogo">Mulher</a>
+              <a href="index.html?cat=Homem#catalogo">Homem</a>
+              <a href="index.html?cat=Praia#catalogo">Praia</a>
+              <a href="index.html?cat=Acessórios#catalogo">Acessórios</a>
             </div>
           </div>
           <a href="index.html">Início</a>
           <a href="index.html#catalogo">Produtos</a>
           <a href="nossa-loja.html">Nossa Loja</a>
-          <a href="carrinho.html" class="link-carrinho">🛒 Carrinho <span class="badge-carrinho">0</span></a>
+          <a href="carrinho.html" class="link-carrinho">Carrinho <span class="badge-carrinho">0</span></a>
         </nav>
       </div>
     </header>`;
@@ -137,11 +137,11 @@ function renderizarRodape() {
           </div>
           <div>
             <h3>Loja física</h3>
-            <p>📍 ${CONFIG.endereco}, ${CONFIG.cidade}${CONFIG.cep && CONFIG.cep !== "00000-000" ? " — CEP " + CONFIG.cep : ""}${CONFIG.plusCode ? `<br>🧭 ${CONFIG.plusCode}` : ""}<br>🕒 ${CONFIG.horario}</p>
+            <p>${CONFIG.endereco}, ${CONFIG.cidade}${CONFIG.cep && CONFIG.cep !== "00000-000" ? " — CEP " + CONFIG.cep : ""}${CONFIG.plusCode ? `<br>${CONFIG.plusCode}` : ""}<br>${CONFIG.horario}</p>
           </div>
           <div>
             <h3>Contacto</h3>
-            <p><a id="rodape-whatsapp" target="_blank" rel="noopener">💬 WhatsApp da loja</a><br>✉️ ${CONFIG.email}<br>📸 ${CONFIG.instagram}</p>
+            <p><a id="rodape-whatsapp" target="_blank" rel="noopener">WhatsApp da loja</a><br>${CONFIG.email}<br>${CONFIG.instagram}</p>
           </div>
         </div>
         <div class="rodape-bottom">© ${new Date().getFullYear()} ${CONFIG.nomeLoja} — Todos os direitos reservados.</div>
@@ -156,7 +156,7 @@ function cardProduto(p) {
   return `
     <article class="card">
       <a class="card-img" href="produto.html?id=${p.id}" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
-        <span class="card-emoji">${p.emoji}</span>
+        <span class="card-titulo-img">${p.nome}</span>
         ${desconto ? `<span class="tag-desconto">-${desconto}%</span>` : ""}
       </a>
       <div class="card-corpo">
@@ -237,7 +237,7 @@ function iniciarDetalhe() {
   div.innerHTML = `
     <div class="detalhe">
       <div class="detalhe-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
-        ${p.emoji}
+        ${p.nome}
         ${desconto ? `<span class="tag-desconto">-${desconto}%</span>` : ""}
       </div>
       <div class="detalhe-info">
@@ -254,7 +254,7 @@ function iniciarDetalhe() {
           <button class="btn" onclick="adicionarQtdDetalhe(${p.id})">Adicionar ao carrinho</button>
         </div>
         <div class="detalhe-acoes">
-          <a class="btn btn-whatsapp" id="link-whatsapp-produto" target="_blank" rel="noopener">💬 Pedir pelo WhatsApp</a>
+          <a class="btn btn-whatsapp" id="link-whatsapp-produto" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
           <a class="btn btn-claro" href="index.html#catalogo">Continuar comprando</a>
         </div>
       </div>
@@ -273,7 +273,7 @@ function renderizarCarrinho() {
   const carrinho = getCarrinho();
   const area = document.getElementById("area-pedido");
   if (!carrinho.length) {
-    div.innerHTML = `<div class="carrinho-vazio"><p>🛒 O teu carrinho está vazio.</p><a class="btn" href="index.html">Ver produtos</a></div>`;
+    div.innerHTML = `<div class="carrinho-vazio"><p>O teu carrinho está vazio.</p><a class="btn" href="index.html">Ver produtos</a></div>`;
     if (area) area.style.display = "none";
     return;
   }
@@ -283,7 +283,7 @@ function renderizarCarrinho() {
     if (!p) return "";
     return `
       <div class="item-carrinho">
-        <div class="item-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">${p.emoji}</div>
+        <div class="item-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">${p.nome}</div>
         <div class="item-info">
           <a href="produto.html?id=${p.id}"><strong>${p.nome}</strong></a>
           <span class="item-cat">${p.categoria}</span>
@@ -295,7 +295,7 @@ function renderizarCarrinho() {
           <button onclick="alterarQtd(${p.id}, 1)">+</button>
         </div>
         <div class="item-total">${formatarPreco(p.preco * i.qtd)}</div>
-        <button class="item-remover" onclick="removerDoCarrinho(${p.id})" title="Remover">🗑️</button>
+        <button class="item-remover" onclick="removerDoCarrinho(${p.id})" title="Remover">Remover</button>
       </div>`;
   }).join("");
   atualizarResumo();
@@ -333,7 +333,7 @@ function montarMensagemPedido(forma, nome, telefone, obs) {
   });
   const sub = subtotalCarrinho();
   const ent = valorEntrega();
-  let msg = `Olá! Quero fazer um pedido na *${CONFIG.nomeLoja}* 🛍️\n\n${linhas.join("\n")}\n\nSubtotal: ${formatarPreco(sub)}\n`;
+  let msg = `Olá! Quero fazer um pedido na *${CONFIG.nomeLoja}*\n\n${linhas.join("\n")}\n\nSubtotal: ${formatarPreco(sub)}\n`;
   if (forma === "retirada") {
     const sinal = Math.ceil((sub + ent) * CONFIG.sinalMinimo * 100) / 100;
     msg += `Forma: retirada na loja física (grátis)\nSinal mínimo em dinheiro na loja (1/3 do total): ${formatarPreco(sinal)}\n`;
@@ -363,20 +363,20 @@ function finalizarPedido() {
     const sinal = Math.ceil(total * CONFIG.sinalMinimo * 100) / 100;
     resultado.innerHTML = `
       <div class="pedido-ok">
-        <h2>✅ Pedido registado!</h2>
+        <h2>Pedido registado!</h2>
         <p>O seu código de retirada é:</p>
         <span class="codigo">${codigo}</span>
         <p>Apresente este código na nossa loja física:<br><strong>${CONFIG.endereco}, ${CONFIG.cidade}</strong></p>
         <p>Pagamento na retirada: <strong>${CONFIG.formasPagamento}</strong>.</p>
         <p>${CONFIG.notaSinal}<br>Sinal mínimo neste pedido: <strong>${formatarPreco(sinal)}</strong>.</p>
-        <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">💬 Confirmar também pelo WhatsApp</a>
+        <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">Confirmar também pelo WhatsApp</a>
       </div>`;
   } else {
     resultado.innerHTML = `
       <div class="pedido-ok">
-        <h2>✅ Quase pronto!</h2>
+        <h2>Quase pronto!</h2>
         <p>Reveja e envie o seu pedido pelo WhatsApp da loja para confirmarmos a entrega:</p>
-        <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">💬 Enviar pedido no WhatsApp</a>
+        <a class="btn btn-whatsapp" href="${url}" target="_blank" rel="noopener">Enviar pedido no WhatsApp</a>
       </div>`;
   }
   limparCarrinho();
