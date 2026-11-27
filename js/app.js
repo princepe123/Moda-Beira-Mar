@@ -242,11 +242,6 @@ function adicionarQtdDetalhe(id) {
   adicionarAoCarrinho(id, qtdDetalhe);
 }
 
-function linkWhatsAppProduto(p) {
-  const msg = `Olá! Quero comprar no site da *${CONFIG.nomeLoja}*:\n\n• ${p.nome} (x${qtdDetalhe}) — ${formatarPreco(p.preco * qtdDetalhe)}\n\nTotal: *${formatarPreco(p.preco * qtdDetalhe)}*`;
-  return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(msg);
-}
-
 function iniciarDetalhe() {
   const params = new URLSearchParams(location.search);
   const id = parseInt(params.get("id"), 10);
@@ -276,15 +271,10 @@ function iniciarDetalhe() {
             <button onclick="mudarQtdDetalhe(1)">+</button>
           </div>
           <button class="btn" onclick="adicionarQtdDetalhe(${p.id})">Adicionar ao carrinho</button>
-        </div>
-        <div class="detalhe-acoes">
-          <a class="btn btn-whatsapp" id="link-whatsapp-produto" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
-          <a class="btn btn-claro" href="index.html#catalogo">Continuar comprando</a>
+          <a class="btn btn-claro" href="index.html#catalogo">Ver mais produtos</a>
         </div>
       </div>
     </div>`;
-  const w = document.getElementById("link-whatsapp-produto");
-  if (w) w.href = linkWhatsAppProduto(p);
   const relacionados = produtos.filter(x => x.categoria === p.categoria && x.id !== p.id).slice(0, 4);
   const secao = document.getElementById("relacionados");
   if (secao && relacionados.length) {
