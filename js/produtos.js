@@ -305,5 +305,34 @@ const produtos = [
     foto: "fotos/biquini-croche-verde.jpg",
     cor: ["#d1fae5", "#059669"],
     descricao: "Biquíni de croché verde escuro com detalhes brancos, alças finas ajustáveis e top triangular. Tamanhos P a G."
+  },
+  {
+    id: 32,
+    nome: "Vestido de Convidada",
+    categoria: "Casamento",
+    preco: 89.9,
+    precoAntigo: 119.9,
+    novo: true,
+    destaque: true,
+    cor: ["#fbcfe8", "#f472b6"],
+    descricao: "Vestido elegante para convidadas de casamento e festas. Tecido fluido, corte clássica. Tamanhos P a GG."
+  },
+  {
+    id: 33,
+    nome: "Clutch de Festa",
+    categoria: "Casamento",
+    preco: 45.9,
+    precoAntigo: null,
+    cor: ["#fef3c7", "#c9973f"],
+    descricao: "Carteira pequena para cerimónias, com corrente de ombro. Cores: dourado, rosa e preto."
+  },
+  {
+    id: 34,
+    nome: "Brincos Longos de Festa",
+    categoria: "Casamento",
+    preco: 19.9,
+    precoAntigo: null,
+    cor: ["#e0e7ff", "#818cf8"],
+    descricao: "Brincos longos e leves, dourados ou prateados. Ideais para casamentos e celebrações."
   }
 ];

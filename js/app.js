@@ -87,7 +87,7 @@ function aplicarLogo() {
   const nome = document.getElementById("hero-logo-nome");
   if (nome) nome.textContent = CONFIG.logo ? "" : (CONFIG.logoNome || "");
   const hero = document.getElementById("hero");
-  if (hero && CONFIG.heroFoto) hero.style.backgroundImage = `linear-gradient(rgba(17,17,17,.38), rgba(17,17,17,.38)), url("${CONFIG.heroFoto}")`;
+  if (hero && CONFIG.heroFoto) hero.style.backgroundImage = `linear-gradient(rgba(13,59,102,.42), rgba(13,59,102,.42)), url("${CONFIG.heroFoto}")`;
   const man = document.getElementById("hero-manifesto");
   if (man) man.textContent = CONFIG.manifesto || CONFIG.slogan;
   const intro = document.getElementById("intro-texto");
@@ -99,6 +99,7 @@ function aplicarCores() {
   r.setProperty("--primaria", CONFIG.corPrimaria);
   r.setProperty("--destaque", CONFIG.corDestaque);
   r.setProperty("--whatsapp", CONFIG.corWhatsApp);
+  r.setProperty("--fundo", CONFIG.corFundo || "#fdfbf7");
   if (CONFIG.imagemFundo) document.body.style.backgroundImage = `url("${CONFIG.imagemFundo}")`;
   document.title = CONFIG.nomeLoja + " — Roupas e acessórios";
 }
@@ -117,6 +118,7 @@ function renderizarCabecalho() {
             <a href="index.html?cat=Homem#catalogo">Homem</a>
             <a href="index.html?cat=Praia#catalogo">Praia</a>
             <a href="index.html?cat=Acessórios#catalogo">Acessórios</a>
+            <a href="index.html?cat=Casamento#catalogo">Casamento</a>
             <div class="opcoes-div"></div>
             <a href="index.html">Início</a>
             <a href="index.html#catalogo">Produtos</a>
@@ -160,7 +162,7 @@ function renderizarRodape() {
             <p><a id="rodape-whatsapp" target="_blank" rel="noopener">WhatsApp da loja</a><br>${CONFIG.email}<br>${CONFIG.instagram}</p>
           </div>
         </div>
-        <div class="rodape-bottom">© ${new Date().getFullYear()} ${CONFIG.nomeLoja} — Todos os direitos reservados.</div>
+        <div class="rodape-bottom">© ${new Date().getFullYear()} ${CONFIG.nomeLoja} — Todos os direitos reservados. · Preços com IVA incluído.</div>
       </div>
     </footer>`;
   const w = document.getElementById("rodape-whatsapp");
@@ -228,11 +230,11 @@ function renderizarSecaoHome(idLista, lista) {
   div.innerHTML = lista.map(cardProduto).join("");
 }
 
-let carrosselTimer = null;
+let carrosselTimers = {};
 
-function iniciarCarrosselNovidades() {
-  const faixa = document.getElementById("lista-novidades");
-  const carrossel = document.getElementById("carrossel-novidades");
+function iniciarCarrossel(idFaixa, idCarrossel, idPrev, idNext) {
+  const faixa = document.getElementById(idFaixa);
+  const carrossel = document.getElementById(idCarrossel);
   if (!faixa || !carrossel) return;
   const total = faixa.children.length;
   let indice = 0;
@@ -254,19 +256,23 @@ function iniciarCarrosselNovidades() {
     if (indice < 0) indice = max;
     aplicar();
   };
-  const parar = () => clearInterval(carrosselTimer);
+  const parar = () => clearInterval(carrosselTimers[idCarrossel]);
   const comecar = () => {
     parar();
-    carrosselTimer = setInterval(() => ir(1), 3500);
-    if (carrosselTimer.unref) carrosselTimer.unref();
+    if (total <= visiveis()) return;
+    carrosselTimers[idCarrossel] = setInterval(() => ir(1), 3500);
+    if (carrosselTimers[idCarrossel].unref) carrosselTimers[idCarrossel].unref();
   };
-  if (total > visiveis()) comecar();
+  const prev = document.getElementById(idPrev);
+  const next = document.getElementById(idNext);
+  if (prev && next) {
+    if (total <= visiveis()) { prev.style.display = "none"; next.style.display = "none"; }
+    prev.addEventListener("click", () => { parar(); ir(-1); });
+    next.addEventListener("click", () => { parar(); ir(1); });
+  }
+  comecar();
   carrossel.addEventListener("mouseenter", parar);
-  carrossel.addEventListener("mouseleave", () => { if (total > visiveis()) comecar(); });
-  const prev = document.getElementById("car-prev");
-  const next = document.getElementById("car-next");
-  if (prev) prev.addEventListener("click", () => { parar(); ir(-1); });
-  if (next) next.addEventListener("click", () => { parar(); ir(1); });
+  carrossel.addEventListener("mouseleave", comecar);
   window.addEventListener("resize", () => {
     indice = 0;
     aplicar();
@@ -275,9 +281,11 @@ function iniciarCarrosselNovidades() {
 
 function iniciarHome() {
   renderizarSecaoHome("lista-novidades", produtos.filter(p => p.novo));
-  renderizarSecaoHome("lista-mais-vendidos", produtos.filter(p => p.bestseller));
+  renderizarSecaoHome("lista-mais-vistos", produtos.filter(p => p.bestseller));
   renderizarSecaoHome("lista-destaques", produtos.filter(p => p.destaque));
-  iniciarCarrosselNovidades();
+  iniciarCarrossel("lista-novidades", "carrossel-novidades", "car-prev", "car-next");
+  iniciarCarrossel("lista-mais-vistos", "carrossel-mais-vistos", "mv-prev", "mv-next");
+  iniciarCarrossel("lista-destaques", "carrossel-destaques", "des-prev", "des-next");
 }
 
 function iniciarCatalogo() {

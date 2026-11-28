@@ -4,7 +4,7 @@ Site de vendas completo e 100% estático (HTML + CSS + JavaScript puro): não pr
 
 ## O que o site faz
 
-- **Novidades** é um carrossel automático horizontal de cartões grandes com foto: mostra no máximo 4 por linha (3/2/1 no telemóvel), avança 1 cartão a cada 3,5 s e volta ao início (para ao passar o rato; também tem setas ‹ › para navegar à mão)
+- **Novidades**, **Mais vistos** e **Escolhidos em cada setor** são três carrosséis automáticos horizontais com foto: máx. 4 cartões por linha (3/2/1 no telemóvel), avançam 1 cartão a cada 3,5 s e têm setas ‹ › nas laterais (as setas escondem-se quando há poucos produtos)
 
 - **Vitrine de produtos** com campo de pesquisa dentro da secção do catálogo e filtro por categoria (`index.html`); o topo do site tem só o logótipo + nome da empresa e o botão de menu ☰
 - **Página de produto** com quantidade e pedido direto pelo WhatsApp (`produto.html?id=1`)
@@ -66,7 +66,7 @@ O menu **Opções** no topo do site (estilo "settings") lista as categorias prin
 
 ### 3. Cores e fundo — também em `js/config.js`
 
-`corPrimaria`, `corDestaque` e `corWhatsApp` (formato `#rrggbb`), `imagemFundo` (caminho da imagem de fundo, ex.: `"fotos/fundo-site.png"`; vazio `""` = só cor) e `logo` + `logoNome` (imagem do logótipo no cabeçalho e centrada no início da página, com o nome ao lado, ex.: `"fotos/logo.png"` e `"à Beira-Mar"`; vazio `""` = só texto).
+`corPrimaria` (azul-mar #0d3b66), `corDestaque` (ouro #c9973f), `corWhatsApp`, `corFundo` (fundo #fdfbf7) — formato `#rrggbb`. Os títulos usam fonte serif (Georgia) para o ar premium europeu, `imagemFundo` (caminho da imagem de fundo, ex.: `"fotos/fundo-site.png"`; vazio `""` = só cor) e `logo` + `logoNome` (imagem do logótipo no cabeçalho e centrada no início da página, com o nome ao lado, ex.: `"fotos/logo.png"` e `"à Beira-Mar"`; vazio `""` = só texto).
 
 ## Como publicar de graça
 
