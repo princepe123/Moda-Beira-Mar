@@ -8,7 +8,7 @@ Site de vendas completo e 100% estático (HTML + CSS + JavaScript puro): não pr
 
 - **Vitrine de produtos** com campo de pesquisa dentro da secção do catálogo e filtro por categoria (`index.html`); o topo do site tem só o logótipo + nome da empresa e o botão de menu ☰
 - **Página de produto** com quantidade e pedido direto pelo WhatsApp (`produto.html?id=1`)
-- **Carrinho de compras** salvo no navegador do cliente (`carrinho.html`)
+- **Carrinho de compras** salvo no navegador do cliente (`carrinho.html`), com um **botão flutuante da carrinha** (com contador de itens) fixo em todas as páginas, que acompanha a compra; no fim da página do carrinho há os botões **Finalizar a compra** e **Limpar carrinho**
 - **Checkout em duas formas**:
   - 🚚 Entrega — o pedido é enviado como mensagem pronta no WhatsApp da loja
   - 🏪 Retirada na loja física — gera um código de 6 dígitos para apresentar na loja
@@ -66,7 +66,7 @@ Na página do produto (`produto.html?id=N`) aparecem agora, como no exemplo: sel
 
 Basta copiar um bloco existente, mudar os valores e salvar. Para usar **fotos reais**, coloca a imagem na pasta `fotos/` e adiciona o campo `foto: "fotos/nome-da-imagem.jpg"` ao produto — o cartão, a página do produto e o carrinho passam a mostrar a foto automaticamente (sem foto, mostra o nome do produto sobre a cor).
 
-O menu **Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`.
+O menu **Opções** no topo do site (estilo "settings") lista as categorias principais — Crianças, Mulher, Homem, Praia, Acessórios — e cada uma abre o catálogo já filtrado: `index.html?cat=NOME_DA_CATEGORIA#catalogo` (ex.: `index.html?cat=Praia#catalogo`). Para mudar as opções do menu, edite o bloco `menu-opcoes` em `js/app.js`. A carrinha já não está no menu — é o botão flutuante (SVG) renderizado em `renderizarCabecalho` com a classe `flutuante-carrinho`.
 
 ### 3. Cores e fundo — também em `js/config.js`
 

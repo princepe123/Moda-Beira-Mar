@@ -59,6 +59,12 @@ function limparCarrinho() {
   salvarCarrinho([]);
 }
 
+function limparCarrinhoUI() {
+  limparCarrinho();
+  renderizarCarrinho();
+  abrirToast("Carrinho limpo");
+}
+
 function produtoPorId(id) {
   return produtos.find(p => p.id === id);
 }
@@ -122,17 +128,17 @@ function renderizarCabecalho() {
             <a href="index.html?cat=Homem#catalogo">Homem</a>
             <a href="index.html?cat=Praia#catalogo">Praia</a>
             <a href="index.html?cat=Acessórios#catalogo">Acessórios</a>
-            <a href="index.html?cat=Casamento#catalogo">Casamento</a>
             <div class="opcoes-div"></div>
-            <a href="index.html">Início</a>
             <a href="index.html#catalogo">Produtos</a>
-            <a href="nossa-loja.html">Nossa Loja</a>
-            <a href="carrinho.html">Carrinho <span class="badge-carrinho">0</span></a>
           </div>
         </div>
         <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}${CONFIG.logoNome || CONFIG.nomeLoja}</a>
       </div>
-    </header>`;
+    </header>
+    <a class="flutuante-carrinho" href="carrinho.html" aria-label="Carrinho de compras" title="Carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <span class="badge-carrinho">0</span>
+    </a>`;
   const w = document.getElementById("botao-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
   const menu = document.getElementById("menu-opcoes");
