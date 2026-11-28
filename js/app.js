@@ -86,6 +86,10 @@ function aplicarLogo() {
   }
   const nome = document.getElementById("hero-logo-nome");
   if (nome) nome.textContent = CONFIG.logo ? "" : (CONFIG.logoNome || "");
+  const hero = document.getElementById("hero");
+  if (hero && CONFIG.heroFoto) hero.style.backgroundImage = `linear-gradient(rgba(17,17,17,.38), rgba(17,17,17,.38)), url("${CONFIG.heroFoto}")`;
+  const man = document.getElementById("hero-manifesto");
+  if (man) man.textContent = CONFIG.manifesto || CONFIG.slogan;
 }
 
 function aplicarCores() {
