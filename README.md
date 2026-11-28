@@ -87,5 +87,5 @@ Também funciona arrastando a pasta para o Netlify (netlify.com/drop) ou Vercel.
 - Para vender com pagamento online automático (cartão/Pix no próprio site), seria necessário integrar um gateway (Mercado Pago, Stripe etc.) — dá para adicionar depois.
 - Nunca coloque senhas ou chaves de API neste projeto: ele é só frontend.
 
-- O **rodapé** mostra as **formas de pagamento com ícones SVG** (PayPal, MB WAY, cartão de crédito/débito, transferência bancária, dinheiro na loja) — bloco `rodape-pagamentos` em `renderizarRodape` (`js/app.js`). Portes grátis a partir do valor em `entregaGratisAcimaDe` (atualmente 100 €).
+- O **rodapé** mostra as **formas de pagamento com ícones SVG** (PayPal, MB WAY, cartão de crédito/débito, transferência bancária, dinheiro na loja) — coluna "Formas de pagamento" com chips de ícones e a linha de informação `rodape-info` (pagamento seguro / entrega ou retirada / trocas e devoluções), tudo em `renderizarRodape` (`js/app.js`). Portes grátis a partir do valor em `entregaGratisAcimaDe` (atualmente 100 €).
 - As **setas dos carrosséis** usam as classes `.car-prev` / `.car-next` (posicionadas à esquerda/direita); os ids (`car-prev`, `mv-prev`, `des-prev`, etc.) servono só para o JS em `iniciarCarrossel`.

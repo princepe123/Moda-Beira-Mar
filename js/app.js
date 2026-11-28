@@ -155,38 +155,63 @@ function renderizarCabecalho() {
 function renderizarRodape() {
   const el = document.getElementById("rodape");
   if (!el) return;
+  const cats = ["Crianças", "Mulher", "Homem", "Praia", "Acessórios"];
+  const pct = Math.round(CONFIG.sinalMinimo * 100);
   el.innerHTML = `
     <footer class="rodape">
       <div class="container">
         <div class="rodape-grid">
           <div>
-            <h3>${CONFIG.nomeLoja}</h3>
-            <p>${CONFIG.slogan}</p>
+            <h3>Ajuda</h3>
+            <ul class="rodape-links">
+              <li><a href="nossa-loja.html">Contactos e loja física</a></li>
+              <li><a href="carrinho.html">Como encomendar</a></li>
+              <li><a id="rodape-whatsapp" target="_blank" rel="noopener">WhatsApp da loja</a></li>
+              ${CONFIG.email ? `<li><a href="mailto:${CONFIG.email}">${CONFIG.email}</a></li>` : ""}
+              ${CONFIG.instagram ? `<li><a href="https://instagram.com/${CONFIG.instagram.replace("@", "")}" target="_blank" rel="noopener">${CONFIG.instagram}</a></li>` : ""}
+            </ul>
           </div>
           <div>
-            <h3>Loja física</h3>
-            <p>${CONFIG.endereco}, ${CONFIG.cidade}${CONFIG.cep && CONFIG.cep !== "00000-000" ? " — CEP " + CONFIG.cep : ""}${CONFIG.plusCode ? `<br>${CONFIG.plusCode}` : ""}<br>${CONFIG.horario}</p>
+            <h3>A nossa loja</h3>
+            <ul class="rodape-links">
+              <li><a href="index.html">Início</a></li>
+              <li><a href="index.html#catalogo">Todos os produtos</a></li>
+              ${cats.map(c => `<li><a href="index.html?cat=${c}#catalogo">${c}</a></li>`).join("")}
+              <li><a href="nossa-loja.html">Nossa Loja</a></li>
+            </ul>
           </div>
           <div>
-            <h3>Contacto</h3>
-            <p><a id="rodape-whatsapp" target="_blank" rel="noopener">WhatsApp da loja</a><br>${CONFIG.email}<br>${CONFIG.instagram}</p>
+            <h3>Formas de pagamento</h3>
+            <div class="pagamentos-grid">
+              <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15"><text x="12" y="17" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="Georgia, serif">P</text></svg>PayPal</span>
+              <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>MB WAY</span>
+              <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Cartão de crédito/débito</span>
+              <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6"/><path d="M5 9v10M9.5 9v10M14.5 9v10M19 9v10M3 19h18"/></svg>Transferência bancária</span>
+              <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>Dinheiro na loja</span>
+            </div>
           </div>
         </div>
-        <div class="rodape-pagamentos">
-          <h3>Formas de pagamento</h3>
-          <div class="pagamentos-lista">
-            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15"><text x="12" y="17" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="Georgia, serif">P</text></svg>PayPal</span>
-            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>MB WAY</span>
-            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Cartão de crédito/débito</span>
-            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6"/><path d="M5 9v10M9.5 9v10M14.5 9v10M19 9v10M3 19h18"/></svg>Transferência bancária</span>
-            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>Dinheiro na loja</span>
+        <div class="rodape-info">
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div><h4>Pagamento seguro</h4><p>PayPal, MB WAY, cartão, transferência bancária ou dinheiro na loja — todas as transmissões são cifradas (SSL).</p></div>
+          </div>
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="10" rx="1"/><path d="M14 9h4l3 3v4h-7z"/><circle cx="6" cy="18.5" r="1.6"/><circle cx="17.5" cy="18.5" r="1.6"/></svg>
+            <div><h4>Entrega ou retirada</h4><p>Enviamos para a sua morada (portes grátis acima de ${formatarPreco(CONFIG.entregaGratisAcimaDe)}) ou retire na loja física — com sinal de ${pct}% e prazo de ${CONFIG.prazoRetiradaDiasUteis} dias úteis.</p></div>
+          </div>
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.9-3.4L23 10M1 14l4.6 4.4A9 9 0 0 0 20.5 15"/></svg>
+            <div><h4>Trocas e devoluções</h4><p>Se algo não ficar bem, o valor fica como <strong>saldo da loja</strong> para compras futuras. Fale connosco pelo <a id="rodape-whatsapp2" target="_blank" rel="noopener">WhatsApp</a>.</p></div>
           </div>
         </div>
-        <div class="rodape-bottom">© ${new Date().getFullYear()} ${CONFIG.nomeLoja} — Todos os direitos reservados. · Preços com IVA incluído.</div>
+        <div class="rodape-bottom">© ${new Date().getFullYear()} ${CONFIG.nomeLoja} — Todos os direitos reservados. · ${CONFIG.endereco}, ${CONFIG.cidade}${CONFIG.plusCode ? " · " + CONFIG.plusCode : ""} · Preços com IVA incluído.</div>
       </div>
     </footer>`;
   const w = document.getElementById("rodape-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
+  const w2 = document.getElementById("rodape-whatsapp2");
+  if (w2) w2.href = "https://wa.me/" + CONFIG.whatsapp;
 }
 
 function midiaProduto(p, classeImg) {
