@@ -122,20 +122,11 @@ function renderizarCabecalho() {
             <a href="carrinho.html">Carrinho <span class="badge-carrinho">0</span></a>
           </div>
         </div>
-        <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}<span class="logo-texto"><span class="logo-nome">${CONFIG.logoNome || CONFIG.nomeLoja}</span><span class="logo-slogan">${CONFIG.slogan}</span></span></a>
-        <form class="busca-topo" id="form-busca-topo">
-          <input type="search" id="busca-topo" placeholder="Procura por produto, coleção..." autocomplete="off">
-        </form>
+        <a class="logo" href="index.html">${CONFIG.logo ? `<img class="logo-img" src="${CONFIG.logo}" alt="${CONFIG.logoNome || CONFIG.nomeLoja}">` : ""}${CONFIG.logoNome || CONFIG.nomeLoja}</a>
       </div>
     </header>`;
   const w = document.getElementById("botao-whatsapp");
   if (w) w.href = "https://wa.me/" + CONFIG.whatsapp;
-  const form = document.getElementById("form-busca-topo");
-  if (form) form.addEventListener("submit", e => {
-    e.preventDefault();
-    const q = document.getElementById("busca-topo").value.trim();
-    location.href = "index.html?q=" + encodeURIComponent(q) + "#catalogo";
-  });
   const menu = document.getElementById("menu-opcoes");
   const btn = document.getElementById("btn-opcoes");
   if (menu && btn) {
