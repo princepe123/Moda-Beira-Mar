@@ -775,8 +775,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderizarCabecalho();
   renderizarRodape();
   atualizarBadge();
-  const tph = document.getElementById("texto-pagamento-home");
-  if (tph) tph.textContent = CONFIG.formasPagamento + " — na entrega ou na retirada.";
   if (document.getElementById("lista-produtos")) { iniciarCatalogo(); iniciarHome(); }
   if (document.getElementById("detalhe-produto")) iniciarDetalhe();
   if (document.getElementById("lista-carrinho")) iniciarCarrinho();
