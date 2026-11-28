@@ -90,6 +90,8 @@ function aplicarLogo() {
   if (hero && CONFIG.heroFoto) hero.style.backgroundImage = `linear-gradient(rgba(17,17,17,.38), rgba(17,17,17,.38)), url("${CONFIG.heroFoto}")`;
   const man = document.getElementById("hero-manifesto");
   if (man) man.textContent = CONFIG.manifesto || CONFIG.slogan;
+  const intro = document.getElementById("intro-texto");
+  if (intro) intro.textContent = CONFIG.introducao || "";
 }
 
 function aplicarCores() {

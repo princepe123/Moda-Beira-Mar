@@ -3,6 +3,7 @@ const CONFIG = {
   logoNome: "à Beira-Mar",
   slogan: "Roupas e acessórios à beira-mar — compra online e recebe em casa ou retira na loja física",
   manifesto: "Moda à beira-mar: simples, intemporal e feita para durar.",
+  introducao: "A Moda à Beira-Mar é uma loja física real, no Terminal em Seixal, Setúbal — e agora também está online. Todas as peças que encontra aqui no site são as mesmas que estão na loja, escolhidas peça a peça. Faça a sua encomenda para entrega em casa ou para levantar na loja (com sinal de 10% e 3 dias úteis para levantar). Pagamento seguro por PayPal, MB WAY ou transferência bancária, com prazos e condições claros em cada encomenda.",
   heroFoto: "fotos/guarda-sol-azul-2m40.jpg",
   whatsapp: "351000000000",
   paypal: "",
