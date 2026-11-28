@@ -1,5 +1,6 @@
 const CARRINHO_KEY = "carrinho_loja";
 let qtdDetalhe = 1;
+let tamanhoDetalhe = null;
 let categoriaAtiva = "todas";
 let buscaAtiva = "";
 
@@ -20,27 +21,30 @@ function salvarCarrinho(carrinho) {
   atualizarBadge();
 }
 
-function adicionarAoCarrinho(id, qtd) {
+function adicionarAoCarrinho(id, qtd, tamanho) {
   qtd = qtd || 1;
+  tamanho = tamanho || null;
   const carrinho = getCarrinho();
-  const item = carrinho.find(i => i.id === id);
+  const item = carrinho.find(i => i.id === id && (i.tamanho || null) === tamanho);
   if (item) {
     item.qtd += qtd;
   } else {
-    carrinho.push({ id: id, qtd: qtd });
+    carrinho.push({ id: id, qtd: qtd, tamanho: tamanho });
   }
   salvarCarrinho(carrinho);
   abrirToast("Adicionado ao carrinho");
 }
 
-function removerDoCarrinho(id) {
-  salvarCarrinho(getCarrinho().filter(i => i.id !== id));
+function removerDoCarrinho(id, tamanho) {
+  const chave = tamanho || null;
+  salvarCarrinho(getCarrinho().filter(i => !(i.id === id && (i.tamanho || null) === chave)));
   if (document.getElementById("lista-carrinho")) renderizarCarrinho();
 }
 
-function alterarQtd(id, delta) {
+function alterarQtd(id, delta, tamanho) {
+  const chave = tamanho || null;
   const carrinho = getCarrinho();
-  const item = carrinho.find(i => i.id === id);
+  const item = carrinho.find(i => i.id === id && (i.tamanho || null) === chave);
   if (!item) return;
   item.qtd += delta;
   if (item.qtd < 1) {
@@ -315,8 +319,14 @@ function mudarQtdDetalhe(d) {
   if (el) el.textContent = qtdDetalhe;
 }
 
+function selecionarTamanho(t, btn) {
+  tamanhoDetalhe = t;
+  document.querySelectorAll(".btn-tamanho").forEach(b => b.classList.remove("ativo"));
+  if (btn) btn.classList.add("ativo");
+}
+
 function adicionarQtdDetalhe(id) {
-  adicionarAoCarrinho(id, qtdDetalhe);
+  adicionarAoCarrinho(id, qtdDetalhe, tamanhoDetalhe);
 }
 
 function iniciarDetalhe() {
@@ -329,7 +339,12 @@ function iniciarDetalhe() {
     return;
   }
   qtdDetalhe = 1;
+  tamanhoDetalhe = null;
   const desconto = p.precoAntigo ? Math.round((1 - p.preco / p.precoAntigo) * 100) : 0;
+  const tamanhos = p.tamanhos && p.tamanhos.length
+    ? p.tamanhos
+    : (["Homem", "Mulher", "Crianças", "Casamento"].includes(p.categoria) ? ["XS", "S", "M", "L", "XL"] : null);
+  const parcela = Math.round((p.preco / 3) * 100) / 100;
   div.innerHTML = `
     <div class="detalhe">
       <div class="detalhe-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
@@ -340,7 +355,11 @@ function iniciarDetalhe() {
         <span class="card-cat">${p.categoria}</span>
         <h1>${p.nome}</h1>
         <p class="detalhe-preco">${p.precoAntigo ? `<s>${formatarPreco(p.precoAntigo)}</s>` : ""}<strong>${formatarPreco(p.preco)}</strong></p>
+        ${p.ultimaPeca ? `<p class="aviso-stock">Atenção: última peça em stock!</p>` : ""}
         <p class="detalhe-desc">${p.descricao}</p>
+        ${tamanhos ? `<div class="seletor-tamanho"><span>Tamanho:</span>${tamanhos.map(t => `<button type="button" class="btn-tamanho" onclick="selecionarTamanho('${t}', this)">${t}</button>`).join("")}</div>` : ""}
+        <p class="parcelas">ou 3x de ${formatarPreco(parcela)} sem juros</p>
+        ${CONFIG.entregaGratisAcimaDe > 0 ? `<p class="portes-info">Portes grátis em encomendas acima de ${formatarPreco(CONFIG.entregaGratisAcimaDe)}</p>` : ""}
         <div class="detalhe-acoes">
           <div class="seletor-qtd">
             <button onclick="mudarQtdDetalhe(-1)">−</button>
@@ -377,16 +396,16 @@ function renderizarCarrinho() {
         <div class="item-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">${midiaProduto(p, "item-foto")}</div>
         <div class="item-info">
           <a href="produto.html?id=${p.id}"><strong>${p.nome}</strong></a>
-          <span class="item-cat">${p.categoria}</span>
+          <span class="item-cat">${p.categoria}${i.tamanho ? ` · tam. ${i.tamanho}` : ""}</span>
           <span class="item-preco">${formatarPreco(p.preco)} cada</span>
         </div>
         <div class="item-qtd">
-          <button onclick="alterarQtd(${p.id}, -1)">−</button>
+          <button onclick="alterarQtd(${p.id}, -1, '${i.tamanho || ""}}')">−</button>
           <span>${i.qtd}</span>
-          <button onclick="alterarQtd(${p.id}, 1)">+</button>
+          <button onclick="alterarQtd(${p.id}, 1, '${i.tamanho || ""}')">+</button>
         </div>
         <div class="item-total">${formatarPreco(p.preco * i.qtd)}</div>
-        <button class="item-remover" onclick="removerDoCarrinho(${p.id})" title="Remover">Remover</button>
+        <button class="item-remover" onclick="removerDoCarrinho(${p.id}, '${i.tamanho || ""}')" title="Remover">Remover</button>
       </div>`;
   }).join("");
   atualizarResumo();
@@ -420,7 +439,7 @@ function montarMensagemPedido(forma, nome, telefone, morada, obs) {
   const carrinho = getCarrinho();
   const linhas = carrinho.map(i => {
     const p = produtoPorId(i.id);
-    return `• ${p.nome} (x${i.qtd}) — ${formatarPreco(p.preco * i.qtd)}`;
+    return `• ${p.nome} (x${i.qtd}${i.tamanho ? `, tam. ${i.tamanho}` : ""}) — ${formatarPreco(p.preco * i.qtd)}`;
   });
   const sub = subtotalCarrinho();
   const ent = valorEntrega();
@@ -456,7 +475,7 @@ function finalizarPedido() {
   if (forma === "retirada") {
     const itens = carrinho.map(i => {
       const p = produtoPorId(i.id);
-      return p ? { id: p.id, nome: p.nome, qtd: i.qtd, preco: p.preco } : null;
+      return p ? { id: p.id, nome: p.nome, qtd: i.qtd, preco: p.preco, tamanho: i.tamanho || null } : null;
     }).filter(Boolean);
     const total = subtotalCarrinho() + valorEntrega();
     const sinal = Math.ceil(total * CONFIG.sinalMinimo * 100) / 100;

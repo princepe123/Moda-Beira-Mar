@@ -143,6 +143,14 @@ a { color: inherit; }
 .seletor-qtd { display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--borda); border-radius: 10px; padding: 6px 12px; background: #fff; }
 .seletor-qtd button { width: 32px; height: 32px; border: none; background: var(--primaria); color: #fff; border-radius: 8px; font-size: 1.1rem; cursor: pointer; }
 .detalhe-acoes { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 12px; }
+.seletor-tamanho { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; }
+.seletor-tamanho > span { font-weight: 700; margin-right: 4px; }
+.btn-tamanho { min-width: 44px; padding: 8px 12px; border: 1px solid var(--borda); background: #fff; border-radius: 8px; cursor: pointer; font-weight: 600; color: var(--texto); }
+.btn-tamanho:hover { border-color: var(--primaria); }
+.btn-tamanho.ativo { background: var(--primaria); border-color: var(--primaria); color: #fff; }
+.aviso-stock { display: inline-block; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; border-radius: 8px; padding: 6px 12px; font-size: .85rem; font-weight: 700; margin-bottom: 12px; }
+.parcelas { color: var(--cinza); font-size: .92rem; margin: -6px 0 10px; }
+.portes-info { color: var(--primaria); font-size: .85rem; font-weight: 600; margin-bottom: 10px; }
 #relacionados { padding-bottom: 60px; }
 #relacionados h2 { margin-bottom: 18px; font-size: 1.4rem; }
 

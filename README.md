@@ -56,9 +56,13 @@ Cada produto é um objeto dentro do array `produtos`:
   novo: true,          // opcional — entra no carrossel automático "Novidades" (tag NOVO)
   bestseller: true,    // opcional — entra na secção "Mais vistos" (tag MAIS VISTO)
   destaque: true,      // opcional — entra na secção "Escolhidos em cada setor" (convém 1 por categoria)
+  tamanhos: ["P","M","G","GG"], // opcional — botões de tamanho na página do produto (roupa usa XS–XL por defeito)
+  ultimaPeca: true,    // opcional — mostra aviso amarelo "Atenção: última peça em stock!"
   descricao: "Tecido leve plissado..."
 }
 ```
+
+Na página do produto (`produto.html?id=N`) aparecem agora, como no exemplo: seletor de tamanhos, aviso de última peça, linha de parcelas ("ou 3x de … sem juros") e nota de portes grátis acima do valor configurado. O tamanho escolhido acompanha o produto no carrinho (linhas separadas por tamanho) e na mensagem de WhatsApp (`tam. M`).
 
 Basta copiar um bloco existente, mudar os valores e salvar. Para usar **fotos reais**, coloca a imagem na pasta `fotos/` e adiciona o campo `foto: "fotos/nome-da-imagem.jpg"` ao produto — o cartão, a página do produto e o carrinho passam a mostrar a foto automaticamente (sem foto, mostra o nome do produto sobre a cor).
 

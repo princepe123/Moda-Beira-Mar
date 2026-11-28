@@ -34,6 +34,8 @@ const produtos = [
     categoria: "Mulher",
     preco: 149.9,
     precoAntigo: 189.9,
+    ultimaPeca: true,
+    tamanhos: ["P", "M", "G", "GG"],
     cor: ["#e5e7eb", "#6b7280"],
     descricao: "Vestido social preto com corte elegante e leve elasticidade no tecido. Tamanhos P ao GG."
   },
