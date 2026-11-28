@@ -62,7 +62,7 @@ Cada produto é um objeto dentro do array `produtos`:
 }
 ```
 
-Na página do produto (`produto.html?id=N`) aparecem agora, como no exemplo: seletor de tamanhos, aviso de última peça, linha de parcelas ("ou 3x de … sem juros") e nota de portes grátis acima do valor configurado. O tamanho escolhido acompanha o produto no carrinho (linhas separadas por tamanho) e na mensagem de WhatsApp (`tam. M`).
+Na página do produto (`produto.html?id=N`) aparecem agora, como no exemplo: seletor de tamanhos, aviso de última peça, nota de portes grátis acima do valor configurado. O tamanho escolhido acompanha o produto no carrinho (linhas separadas por tamanho) e na mensagem de WhatsApp (`tam. M`).
 
 Basta copiar um bloco existente, mudar os valores e salvar. Para usar **fotos reais**, coloca a imagem na pasta `fotos/` e adiciona o campo `foto: "fotos/nome-da-imagem.jpg"` ao produto — o cartão, a página do produto e o carrinho passam a mostrar a foto automaticamente (sem foto, mostra o nome do produto sobre a cor).
 
@@ -86,3 +86,6 @@ Também funciona arrastando a pasta para o Netlify (netlify.com/drop) ou Vercel.
 - O carrinho fica salvo apenas no navegador do cliente (localStorage) — por isso o pedido final vai pelo WhatsApp ou com código de retirada, que é o fluxo ideal para loja física pequena.
 - Para vender com pagamento online automático (cartão/Pix no próprio site), seria necessário integrar um gateway (Mercado Pago, Stripe etc.) — dá para adicionar depois.
 - Nunca coloque senhas ou chaves de API neste projeto: ele é só frontend.
+
+- O **rodapé** mostra as **formas de pagamento com ícones SVG** (PayPal, MB WAY, cartão de crédito/débito, transferência bancária, dinheiro na loja) — bloco `rodape-pagamentos` em `renderizarRodape` (`js/app.js`). Portes grátis a partir do valor em `entregaGratisAcimaDe` (atualmente 100 €).
+- As **setas dos carrosséis** usam as classes `.car-prev` / `.car-next` (posicionadas à esquerda/direita); os ids (`car-prev`, `mv-prev`, `des-prev`, etc.) servono só para o JS em `iniciarCarrossel`.

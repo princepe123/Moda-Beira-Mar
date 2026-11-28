@@ -172,6 +172,16 @@ function renderizarRodape() {
             <p><a id="rodape-whatsapp" target="_blank" rel="noopener">WhatsApp da loja</a><br>${CONFIG.email}<br>${CONFIG.instagram}</p>
           </div>
         </div>
+        <div class="rodape-pagamentos">
+          <h3>Formas de pagamento</h3>
+          <div class="pagamentos-lista">
+            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15"><text x="12" y="17" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor" font-family="Georgia, serif">P</text></svg>PayPal</span>
+            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>MB WAY</span>
+            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Cartão de crédito/débito</span>
+            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6"/><path d="M5 9v10M9.5 9v10M14.5 9v10M19 9v10M3 19h18"/></svg>Transferência bancária</span>
+            <span class="pagamento-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>Dinheiro na loja</span>
+          </div>
+        </div>
         <div class="rodape-bottom">© ${new Date().getFullYear()} ${CONFIG.nomeLoja} — Todos os direitos reservados. · Preços com IVA incluído.</div>
       </div>
     </footer>`;
@@ -350,7 +360,6 @@ function iniciarDetalhe() {
   const tamanhos = p.tamanhos && p.tamanhos.length
     ? p.tamanhos
     : (["Homem", "Mulher", "Crianças", "Casamento"].includes(p.categoria) ? ["XS", "S", "M", "L", "XL"] : null);
-  const parcela = Math.round((p.preco / 3) * 100) / 100;
   div.innerHTML = `
     <div class="detalhe">
       <div class="detalhe-img" style="background: linear-gradient(135deg, ${p.cor[0]}, ${p.cor[1]})">
@@ -364,7 +373,6 @@ function iniciarDetalhe() {
         ${p.ultimaPeca ? `<p class="aviso-stock">Atenção: última peça em stock!</p>` : ""}
         <p class="detalhe-desc">${p.descricao}</p>
         ${tamanhos ? `<div class="seletor-tamanho"><span>Tamanho:</span>${tamanhos.map(t => `<button type="button" class="btn-tamanho" onclick="selecionarTamanho('${t}', this)">${t}</button>`).join("")}</div>` : ""}
-        <p class="parcelas">ou 3x de ${formatarPreco(parcela)} sem juros</p>
         ${CONFIG.entregaGratisAcimaDe > 0 ? `<p class="portes-info">Portes grátis em encomendas acima de ${formatarPreco(CONFIG.entregaGratisAcimaDe)}</p>` : ""}
         <div class="detalhe-acoes">
           <div class="seletor-qtd">

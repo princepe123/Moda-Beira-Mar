@@ -23,7 +23,7 @@ const CONFIG = {
   imagemFundo: "",
   logo: "fotos/logo.jpg",
   taxaEntrega: 15.0,
-  entregaGratisAcimaDe: 200.0,
+  entregaGratisAcimaDe: 100.0,
   formasPagamento: "PayPal, MB WAY, cartão de crédito/débito, transferência bancária ou dinheiro na loja",
   notaSinal: "Para levantar na loja física é obrigatório pagar um sinal de 10% do valor total da encomenda, para garantir a reserva. Tens 3 dias úteis para levantar; passado esse prazo, o pedido é cancelado.",
   sinalMinimo: 0.1,

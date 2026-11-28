@@ -117,8 +117,8 @@ a { color: inherit; }
 .carrossel-faixa .card { flex: 0 0 calc((100% - 60px) / 4); }
 .car-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 5; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--borda); background: #fff; cursor: pointer; font-size: 1.15rem; line-height: 1; color: var(--texto); box-shadow: var(--sombra); }
 .car-btn:hover { background: var(--primaria); color: #fff; border-color: var(--primaria); }
-#car-prev { left: 8px; }
-#car-next { right: 8px; }
+.car-prev { left: 8px; }
+.car-next { right: 8px; }
 @media (max-width: 900px) { .carrossel-faixa .card { flex-basis: calc((100% - 40px) / 3); } }
 @media (max-width: 640px) { .carrossel-faixa .card { flex-basis: calc((100% - 20px) / 2); } }
 @media (max-width: 440px) { .carrossel-faixa .card { flex-basis: 100%; } }
@@ -149,7 +149,6 @@ a { color: inherit; }
 .btn-tamanho:hover { border-color: var(--primaria); }
 .btn-tamanho.ativo { background: var(--primaria); border-color: var(--primaria); color: #fff; }
 .aviso-stock { display: inline-block; background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; border-radius: 8px; padding: 6px 12px; font-size: .85rem; font-weight: 700; margin-bottom: 12px; }
-.parcelas { color: var(--cinza); font-size: .92rem; margin: -6px 0 10px; }
 .portes-info { color: var(--primaria); font-size: .85rem; font-weight: 600; margin-bottom: 10px; }
 #relacionados { padding-bottom: 60px; }
 #relacionados h2 { margin-bottom: 18px; font-size: 1.4rem; }
@@ -219,6 +218,10 @@ a { color: inherit; }
 .rodape p { font-size: .9rem; }
 .rodape a { color: var(--texto); text-decoration: none; }
 .rodape a:hover { color: var(--destaque); }
+.rodape-pagamentos { margin-top: 26px; }
+.pagamentos-lista { display: flex; flex-wrap: wrap; gap: 8px; }
+.pagamento-chip { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--borda); background: #faf8f4; border-radius: 999px; padding: 6px 14px; font-size: .82rem; font-weight: 600; color: var(--texto); }
+.pagamento-chip svg { color: var(--primaria); flex-shrink: 0; }
 .rodape-bottom { text-align: center; margin-top: 24px; font-size: .8rem; color: #9ca3af; border-top: 1px solid var(--borda); padding-top: 16px; }
 
 .flutuante-whatsapp { position: fixed; right: 20px; bottom: 20px; background: var(--whatsapp); color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(37, 211, 102, .45); z-index: 60; }
