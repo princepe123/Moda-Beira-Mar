@@ -59,9 +59,14 @@
     </section>
 
     <section id="catalogo" class="container">
-      <h2>Os nossos produtos</h2>
+      <div class="catalogo-topo">
+        <h2>Os nossos produtos</h2>
+        <div class="busca-lupa">
+          <svg class="lupa" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          <input type="search" id="busca" placeholder="Pesquisar produto...">
+        </div>
+      </div>
       <div class="filtros">
-        <input type="search" id="busca" placeholder="Pesquisar produto...">
         <div id="botoes-categorias"></div>
       </div>
       <div id="lista-produtos" class="grade"></div>
